@@ -1,0 +1,100 @@
+{
+  "name": "marky-stats",
+  "displayName": "Marky Stats",
+  "description": "Selectable stats status bar display for markdown documents.",
+  "publisher": "robole",
+  "author": {
+    "name": "Rob O'Leary"
+  },
+  "version": "0.1.0",
+  "engines": {
+    "vscode": "^1.48.0"
+  },
+  "icon": "img/logo.png",
+  "galleryBanner": {
+    "color": "#00ffff",
+    "theme": "light"
+  },
+  "keywords": [
+    "markdown",
+    "statistics",
+    "reading time",
+    "word count",
+    "wordcount",
+    "reading stats",
+    "reading statistics",
+    "word counter"
+  ],
+  "categories": [
+    "Other"
+  ],
+  "bugs": {
+    "url": "https://github.com/robole/vscode-marky-stats/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/robole/vscode-marky-stats"
+  },
+  "license": "MIT",
+  "activationEvents": [
+    "onLanguage:markdown",
+    "onCommand:marky-stats.selectItem"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "marky-stats.selectItem",
+        "title": "Marky Stats: Select a Statistic for the Status Bar"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "Marky Stats",
+      "properties": {
+        "markyMarkdown.statisticStatusBarItem": {
+          "type": "string",
+          "default": "Reading Time",
+          "enum": [
+            "Reading Time",
+            "Words",
+            "Lines",
+            "Characters"
+          ],
+          "description": "Choose the statistic item that is shown in the status bar."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "lint": "eslint src",
+    "lint:fix": "eslint --fix src",
+    "format": "npx prettier --write .",
+    "test": "node ./test/runTest.js",
+    "webpack": "webpack --mode development",
+    "webpack-dev": "webpack --mode development --watch",
+    "vscode:prepublish": "webpack --mode production",
+    "build": "vsce package ."
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.1",
+    "@types/mocha": "^7.0.2",
+    "@types/node": "^13.11.0",
+    "@types/vscode": "^1.46.0",
+    "chai": "^4.2.0",
+    "eslint": "^7.2.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-config-roboleary-node": "0.0.2",
+    "eslint-plugin-import": "^2.21.2",
+    "eslint-plugin-node": "^11.1.0",
+    "glob": "^7.1.6",
+    "mocha": "^7.1.2",
+    "prettier": "^2.0.5",
+    "typescript": "^3.8.3",
+    "vsce": "^1.77.0",
+    "vscode-test": "^1.3.0",
+    "webpack": "^4.44.0",
+    "webpack-cli": "^3.3.12"
+  }
+}
