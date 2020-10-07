@@ -11,42 +11,44 @@ class StatisticDisplay {
     );
     this.statusBarItem.command = "marky-stats.selectItem";
     this.selection = 0;
-    this.quickPickItem = [];
+    this.quickPickItems = [];
     this.show();
   }
 
   /**
-   * Update statistic status bar item for the active document. Item selected is based on workspace configuration.
+   * Update the statistic based on the latest text of the active document.
    */
   update() {
-    const marky = vscode.workspace.getConfiguration("markyMarkdown");
-    const item = marky.get("statisticStatusBarItem");
-
-    this.selection = this.getWorkspaceSelection(item);
-
-    this.quickPickItem[0] = {
+    this.quickPickItems[0] = {
       selection: 0,
       label: `Reading Time: ${activeDoc.getReadingTime()} mins`,
     };
-    this.quickPickItem[1] = {
+    this.quickPickItems[1] = {
       selection: 1,
       label: `Words: ${activeDoc.getWordCount()}`,
     };
-    this.quickPickItem[2] = {
+    this.quickPickItems[2] = {
       selection: 2,
       label: `Lines: ${activeDoc.getLineCount()}`,
     };
-    this.quickPickItem[3] = {
+    this.quickPickItems[3] = {
       selection: 3,
       label: `Characters: ${activeDoc.getCharacterCount()}`,
     };
 
-    this.quickPickItem[this.selection].picked = true;
-    this.statusBarItem.text = this.quickPickItem[this.selection].label;
+    this.quickPickItems[this.selection].picked = true;
+    this.statusBarItem.text = this.quickPickItems[this.selection].label;
   }
 
   /**
-   * Show statistic status bar item.
+   * Get the text displayed.
+   */
+  getText() {
+    return this.statusBarItem.text;
+  }
+
+  /**
+   * Show the statistic in the status bar.
    */
   show() {
     this.update();
@@ -54,41 +56,25 @@ class StatisticDisplay {
   }
 
   /**
-   * Hide statistic status bar item.
+   * Hide the statistic in the status bar.
    */
   hide() {
     this.statusBarItem.hide();
   }
 
   /**
-   * Dipose statistic status bar item.
+   * Dispose the object and free resources.
    */
   dispose() {
     this.statusBarItem.dispose();
   }
 
   /**
-   * Show a modal dialog with the statistics for the document.
-   *
-   */
-  showSummaryModal() {
-    let text = this.quickPickItem.join("\n");
-    vscode.window.showInformationMessage(text, {
-      modal: true,
-    });
-  }
-
-  /**
-   * Show a quick pick selection for the statistics of the active document. The selection will toggle the label text for the status bar item.
+   * Show a quick pick selection of the statistics for the active document. The selection will change the display text.
    *
    */
   selectItem() {
-    const editor = vscode.window.activeTextEditor;
-    if (!editor || editor.document.languageId !== "markdown") {
-      return;
-    }
-
-    let quickPick = vscode.window.showQuickPick(this.quickPickItem, {
+    let quickPick = vscode.window.showQuickPick(this.quickPickItems, {
       canPickMany: false,
       placeHolder: "Select a statistic to display",
     });
@@ -105,35 +91,31 @@ class StatisticDisplay {
   }
 
   /**
-   * Save the current selection to the workspace configuration.
+   * Save the current selection to the workspace configuration. The key from the text is saved e.g. "Reading Time".
    *
    */
   async save() {
-    let settingValue = this.quickPickItem[this.selection].label.split(":")[0];
-    return this.write(settingValue);
+    if (vscode.workspace.name !== undefined) {
+      // eslint-disable-next-line prefer-destructuring
+      let label = this.quickPickItems[this.selection].label;
+      let key = label.split(":")[0];
+      const marky = vscode.workspace.getConfiguration("markyMarkdown");
+      await marky.update("statisticStatusBarItem", key);
+    }
   }
 
   /**
-   * Write the current selection to the workspace configuration.
-   *
+   * Translate the text to an index for selection of the correct quickpick item.
    */
-  async write(value) {
-    const marky = vscode.workspace.getConfiguration("markyMarkdown");
-    return marky.update("statisticStatusBarItem", value);
-  }
-
-  /**
-   * Get the value from workspace configuration and translate to an index.
-   */
-  getWorkspaceSelection(value) {
+  getSelectionIndex(text) {
     let index = 0;
-    if (value.startsWith("Reading")) {
+    if (text.startsWith("Reading")) {
       index = 0;
-    } else if (value.startsWith("Word")) {
+    } else if (text.startsWith("Word")) {
       index = 1;
-    } else if (value.startsWith("Line")) {
+    } else if (text.startsWith("Line")) {
       index = 2;
-    } else if (value.startsWith("Character")) {
+    } else if (text.startsWith("Character")) {
       index = 3;
     }
 

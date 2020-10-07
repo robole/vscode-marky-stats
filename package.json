@@ -1,12 +1,12 @@
 {
   "name": "marky-stats",
   "displayName": "Marky Stats",
-  "description": "Selectable stats status bar display for markdown documents.",
+  "description": "A selectable statistic status bar item for markdown documents.",
   "publisher": "robole",
   "author": {
     "name": "Rob O'Leary"
   },
-  "version": "0.1.0",
+  "version": "0.2.0",
   "engines": {
     "vscode": "^1.48.0"
   },
@@ -45,7 +45,8 @@
     "commands": [
       {
         "command": "marky-stats.selectItem",
-        "title": "Marky Stats: Select a Statistic for the Status Bar"
+        "title": "Marky Stats: Select a Statistic for the Status Bar",
+        "enablement": "editorTextFocus && editorLangId == markdown"
       }
     ],
     "configuration": {
