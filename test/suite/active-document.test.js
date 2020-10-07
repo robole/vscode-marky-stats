@@ -9,7 +9,8 @@ suite("ActiveDocument", () => {
     vscode.workspace.openTextDocument(path.join(__dirname, "test.md")).then(
       (document) => {
         vscode.window.showTextDocument(document).then(() => {
-          assert.equal(ActiveDocument.getWordCount(), 31);
+          // @ts-ignore
+          assert.strictEqual(ActiveDocument.getWordCount(), 31);
           done();
         });
       },
@@ -24,7 +25,8 @@ suite("ActiveDocument", () => {
     vscode.workspace.openTextDocument(path.join(__dirname, "test.md")).then(
       (document) => {
         vscode.window.showTextDocument(document).then(() => {
-          assert.equal(ActiveDocument.getReadingTime(), 1);
+          // @ts-ignore
+          assert.strictEqual(ActiveDocument.getReadingTime(), 1);
           done();
         });
       },
@@ -39,7 +41,8 @@ suite("ActiveDocument", () => {
     vscode.workspace.openTextDocument(path.join(__dirname, "test.md")).then(
       (document) => {
         vscode.window.showTextDocument(document).then(() => {
-          assert.equal(ActiveDocument.getCharacterCount(), 241);
+          // @ts-ignore
+          assert.strictEqual(ActiveDocument.getCharacterCount(), 241);
           done();
         });
       },
@@ -54,7 +57,8 @@ suite("ActiveDocument", () => {
     vscode.workspace.openTextDocument(path.join(__dirname, "test.md")).then(
       (document) => {
         vscode.window.showTextDocument(document).then(() => {
-          assert.equal(ActiveDocument.getLineCount(), 4);
+          // @ts-ignore
+          assert.strictEqual(ActiveDocument.getLineCount(), 4);
           done();
         });
       },

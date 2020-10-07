@@ -8,7 +8,7 @@ class ActiveDocument {
   static getWordCount() {
     const editor = vscode.window.activeTextEditor;
     const text = editor.document.getText();
-    let matches = text.match(/\w+/g);
+    let matches = text.match(/[\p{L}\p{N}]+/igu);
 
     if (matches === null) {
       return 0;

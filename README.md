@@ -6,8 +6,6 @@
 ![Visual Studio Marketplace Rating](https://img.shields.io/visual-studio-marketplace/r/robole.marky-stats?logo=visual-studio-code&color=yellow)
 ![Built with](https://img.shields.io/static/v1?label=built%20with&message=good%20vibrations%20%26%20javascript&color=violet)
 
-A selectable statistic status bar item for markdown documents.
-
 ![example of using extension](/img/example.gif)
 
 ## Commands
