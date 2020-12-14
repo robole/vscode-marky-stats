@@ -4,6 +4,17 @@ All notable changes to the "Marky Stats" extension will be documented in this fi
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.2.1] - 2020-12-14
+
+### Fixed
+
+- Word count did not work for non-latin scripts. Updated regex to support all languages.
+
+### Added
+
+- Automatic task for running webpack on startup.
+- Tests for russian text.
+
 ## [0.2.0] - 2020-10-08
 
 ### Added

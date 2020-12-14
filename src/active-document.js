@@ -8,7 +8,8 @@ class ActiveDocument {
   static getWordCount() {
     const editor = vscode.window.activeTextEditor;
     const text = editor.document.getText();
-    let matches = text.match(/[\p{L}\p{N}]+/igu);
+    // unicode match for any letter or number
+    let matches = text.match(/[\p{Letter}\p{Number}]+/giu);
 
     if (matches === null) {
       return 0;
@@ -38,7 +39,7 @@ class ActiveDocument {
   static getCharacterCount() {
     const editor = vscode.window.activeTextEditor;
     const text = editor.document.getText();
-    return text.match(/[.\r\n]*/gm).length;
+    return text.length;
   }
 
   /**

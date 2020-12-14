@@ -5,8 +5,8 @@ const vscode = require("vscode");
 const ActiveDocument = require("../../src/active-document");
 
 suite("ActiveDocument", () => {
-  test("getWordCount", (done) => {
-    vscode.workspace.openTextDocument(path.join(__dirname, "test.md")).then(
+  test("getWordCount for english text", (done) => {
+    vscode.workspace.openTextDocument(path.join(__dirname, "test-en.md")).then(
       (document) => {
         vscode.window.showTextDocument(document).then(() => {
           // @ts-ignore
@@ -21,8 +21,24 @@ suite("ActiveDocument", () => {
     );
   });
 
+  test("getWordCount for russian text", (done) => {
+    vscode.workspace.openTextDocument(path.join(__dirname, "test-ru.md")).then(
+      (document) => {
+        vscode.window.showTextDocument(document).then(() => {
+          // @ts-ignore
+          assert.strictEqual(ActiveDocument.getWordCount(), 25);
+          done();
+        });
+      },
+      (error) => {
+        assert.fail(error);
+        done();
+      }
+    );
+  });
+
   test("getReadingTime", (done) => {
-    vscode.workspace.openTextDocument(path.join(__dirname, "test.md")).then(
+    vscode.workspace.openTextDocument(path.join(__dirname, "test-en.md")).then(
       (document) => {
         vscode.window.showTextDocument(document).then(() => {
           // @ts-ignore
@@ -37,8 +53,8 @@ suite("ActiveDocument", () => {
     );
   });
 
-  test("getCharacterCount", (done) => {
-    vscode.workspace.openTextDocument(path.join(__dirname, "test.md")).then(
+  test("getCharacterCount for english text", (done) => {
+    vscode.workspace.openTextDocument(path.join(__dirname, "test-en.md")).then(
       (document) => {
         vscode.window.showTextDocument(document).then(() => {
           // @ts-ignore
@@ -53,8 +69,24 @@ suite("ActiveDocument", () => {
     );
   });
 
+  test("getCharacterCount for russian text", (done) => {
+    vscode.workspace.openTextDocument(path.join(__dirname, "test-ru.md")).then(
+      (document) => {
+        vscode.window.showTextDocument(document).then(() => {
+          // @ts-ignore
+          assert.strictEqual(ActiveDocument.getCharacterCount(), 167);
+          done();
+        });
+      },
+      (error) => {
+        assert.fail(error);
+        done();
+      }
+    );
+  });
+
   test("getLineCount", (done) => {
-    vscode.workspace.openTextDocument(path.join(__dirname, "test.md")).then(
+    vscode.workspace.openTextDocument(path.join(__dirname, "test-en.md")).then(
       (document) => {
         vscode.window.showTextDocument(document).then(() => {
           // @ts-ignore
