@@ -4,6 +4,8 @@
 ![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/robole.marky-stats?logo=visual-studio-code&color=ffa500)
 ![Extension file size in bytes](https://img.shields.io/static/v1?logo=visual-studio-code&label=size&message=12KB&color=008000)
 ![Visual Studio Marketplace Rating](https://img.shields.io/visual-studio-marketplace/r/robole.marky-stats?logo=visual-studio-code&color=yellow)
+![Visual Studio Marketplace Downloads](https://img.shields.io/visual-studio-marketplace/d/robole.marky-stats?logo=visual-studio-code&color=blue)
+![Visual Studio Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/robole.marky-stats?logo=visual-studio-code&color=blue)
 ![Built with](https://img.shields.io/static/v1?label=built%20with&message=good%20vibrations%20%26%20javascript&color=violet)
 
 ![example of using extension](/img/example.gif)
@@ -24,4 +26,4 @@ This command can be run from the Command Palette (`Ctrl+Shift+P`):
 
 ### Why isn't Marky Stats appearing in the Status Bar?
 
-On a crowded status bar, the Marky Stats item may have become a casualty and has been forced out! You can test this by zooming out, so the text becomes very small, and you will see more items on the status bar. Go to the User Settings, and hide or disable other status bar items to make space.
+On a crowded status bar, the Marky Stats item may have been forced out! You can test this by zooming out, so the text becomes very small, and you will see more items on the status bar. Go to the User Settings, and hide or disable other status bar items to make space.

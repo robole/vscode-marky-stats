@@ -1,12 +1,12 @@
 {
   "name": "marky-stats",
   "displayName": "Marky Stats",
-  "description": "A selectable statistic status bar item for markdown documents.",
+  "description": "A selectable statistic status bar item for markdown documents. Supports all languages.",
   "publisher": "robole",
   "author": {
     "name": "Rob O'Leary"
   },
-  "version": "0.2.1",
+  "version": "0.3.0",
   "engines": {
     "vscode": "^1.48.0"
   },

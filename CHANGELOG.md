@@ -4,6 +4,17 @@ All notable changes to the "Marky Stats" extension will be documented in this fi
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.3.0] - 2021-01-05
+
+### Added
+
+- Added Github action to publish to VS Code marketplace and Open VSX marketplace on push.
+- Added badges for download and install count.
+
+## Edited
+
+- Description in package.json to indicate that it supports all languages.
+
 ## [0.2.1] - 2020-12-14
 
 ### Fixed
