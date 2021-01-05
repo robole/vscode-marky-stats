@@ -4,6 +4,12 @@ All notable changes to the "Marky Stats" extension will be documented in this fi
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.3.1] - 2021-01-05
+
+## Fixed
+
+- To get the Github Action working with new token.
+
 ## [0.3.0] - 2021-01-05
 
 ### Added
