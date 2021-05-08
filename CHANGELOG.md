@@ -4,9 +4,20 @@ All notable changes to the "Marky Stats" extension will be documented in this fi
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
-## [0.3.1] - 2021-01-05
+## [0.4.0] - 2021-05-07
+
+### Changed
+
+- Change the format of README and sharpen up the copy.
+- Changed command title to `Marky Stats: Change Statistic`.
 
 ## Fixed
+
+- Change command `enablement` to "editorLangId == markdown". The `editTextFocus` messes things up.
+
+## [0.3.1] - 2021-01-05
+
+### Fixed
 
 - To get the Github Action working with new token.
 
@@ -17,7 +28,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - Added Github action to publish to VS Code marketplace and Open VSX marketplace on push.
 - Added badges for download and install count.
 
-## Edited
+### Edited
 
 - Description in package.json to indicate that it supports all languages.
 

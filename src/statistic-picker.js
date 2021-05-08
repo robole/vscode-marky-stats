@@ -3,7 +3,7 @@
 const vscode = require("vscode");
 const activeDoc = require("./active-document");
 
-class StatisticDisplay {
+class StatisticPicker {
   constructor() {
     this.statusBarItem = vscode.window.createStatusBarItem(
       vscode.StatusBarAlignment.Left,
@@ -123,4 +123,4 @@ class StatisticDisplay {
   }
 }
 
-module.exports = StatisticDisplay;
+module.exports = StatisticPicker;

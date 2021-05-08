@@ -1,14 +1,15 @@
 {
   "name": "marky-stats",
   "displayName": "Marky Stats",
-  "description": "A selectable statistic status bar item for markdown documents. Supports all languages.",
+  "description": "Stats for Markdown documents.",
   "publisher": "robole",
   "author": {
     "name": "Rob O'Leary"
   },
-  "version": "0.3.1",
+  "version": "0.4.0",
   "engines": {
-    "vscode": "^1.48.0"
+    "vscode": "^1.48.0",
+    "node": ">=10.0.0"
   },
   "icon": "img/logo.png",
   "galleryBanner": {
@@ -17,12 +18,15 @@
   },
   "keywords": [
     "markdown",
+    "markdown stats",
+    "markdown statistics",
     "statistics",
     "reading time",
     "word count",
     "wordcount",
-    "reading stats",
+    "reading time",
     "reading statistics",
+    "reading stat",
     "word counter"
   ],
   "categories": [
@@ -37,16 +41,16 @@
   },
   "license": "MIT",
   "activationEvents": [
-    "onLanguage:markdown",
-    "onCommand:marky-stats.selectItem"
+    "onLanguage:markdown"
   ],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
       {
         "command": "marky-stats.selectItem",
-        "title": "Marky Stats: Select a Statistic for the Status Bar",
-        "enablement": "editorTextFocus && editorLangId == markdown"
+        "title": "Change Statistic",
+        "category": "Marky Stats",
+        "enablement": "editorLangId == markdown"
       }
     ],
     "configuration": {

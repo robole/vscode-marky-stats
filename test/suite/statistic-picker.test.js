@@ -3,7 +3,7 @@
 // @ts-nocheck
 const assert = require("assert");
 const vscode = require("vscode");
-const { getStatisticDisplay } = require("../../src/extension");
+const { getStatisticPicker } = require("../../src/extension");
 
 suite("Statistic Display", () => {
   const extensionID = "robole.marky-stats";
@@ -14,12 +14,12 @@ suite("Statistic Display", () => {
   });
 
   test("Should exist", async () => {
-    const s = extension.exports.getStatisticDisplay();
+    const s = extension.exports.getStatisticPicker();
     assert.ok(s !== undefined);
   });
 
   test("Should display a statistic", async () => {
-    const s = extension.exports.getStatisticDisplay();
+    const s = extension.exports.getStatisticPicker();
     assert.strictEqual(s.getText(), "Reading Time: 1 mins");
   });
 });

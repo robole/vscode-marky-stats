@@ -1,4 +1,5 @@
-/* eslint-disable no-undef */
+/* eslint-disable node/no-missing-require */
+/* eslint-disable import/no-unresolved, no-undef */
 // @ts-nocheck
 const assert = require("assert");
 const vscode = require("vscode");

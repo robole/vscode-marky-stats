@@ -1,39 +1,39 @@
 // eslint-disable-next-line import/no-unresolved, node/no-missing-require
 const vscode = require("vscode");
-const StatisticDisplay = require("./statistic-display");
+const StatisticPicker = require("./statistic-picker");
 
 module.exports = {
   activate,
   deactivate,
 };
 
-let statisticDisplay;
+let statisticPicker;
 
 function activate(context) {
-  statisticDisplay = new StatisticDisplay();
+  statisticPicker = new StatisticPicker();
 
   context.subscriptions.push(
     vscode.commands.registerCommand("marky-stats.selectItem", () => {
-      statisticDisplay.selectItem();
+      statisticPicker.selectItem();
     }),
     vscode.workspace.onDidChangeTextDocument(function (e) {
       if (e.document.languageId === "markdown") {
-        statisticDisplay.update();
+        statisticPicker.update();
       }
     }),
     vscode.window.onDidChangeActiveTextEditor(function (e) {
       if (e.document.languageId === "markdown") {
-        statisticDisplay.show();
+        statisticPicker.show();
       } else {
-        statisticDisplay.hide();
+        statisticPicker.hide();
       }
     })
   );
 
-  // this can be called externally through vscode.extensions.getExtension(extensionID).exports. This is useful for testing. See statistic-display.test.js for an example.
+  // this can be called externally through vscode.extensions.getExtension(extensionID).exports. This is useful for testing. See statistic-picker.test.js for an example.
   let api = {
-    getStatisticDisplay() {
-      return statisticDisplay;
+    getStatisticPicker() {
+      return statisticPicker;
     },
   };
 

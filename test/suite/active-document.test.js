@@ -1,4 +1,4 @@
-/* eslint-disable node/no-missing-require */
+/* eslint-disable import/no-unresolved, node/no-missing-require */
 const assert = require("assert");
 const path = require("path");
 const vscode = require("vscode");

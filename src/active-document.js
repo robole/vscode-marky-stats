@@ -1,4 +1,6 @@
-// eslint-disable-next-line import/no-unresolved, node/no-missing-require
+/* eslint-disable node/no-unsupported-features/es-syntax */
+/* eslint-disable node/no-missing-require */
+/* eslint-disable import/no-unresolved */
 const vscode = require("vscode");
 
 class ActiveDocument {
