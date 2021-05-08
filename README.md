@@ -45,7 +45,7 @@ The extension is only loaded when a markdown file is open. To be more specific, 
 
 ## Installation
 
-1. The extension is listed in the [VS Marketplace](https://marketplace.visualstudio.com/items?itemName=robole.marky-stats) and [Open VSX Marketplace](https://open-vsx.org/extension/robole/marky-stats) where you can download or install it directly.
+1. The extension is listed in the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=robole.marky-stats) and [Open VSX Marketplace](https://open-vsx.org/extension/robole/marky-stats) where you can download or install it directly.
 1. Inside VS Code: Type `Ctrl+P`, write `ext install robole.marky-stats` in the text field, and hit `Enter`.
 1. From the Command-line: Run the command `code --install-extension robole.marky-stats`.
 

@@ -4,6 +4,12 @@ All notable changes to the "Marky Stats" extension will be documented in this fi
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.4.1] - 2021-05-08
+
+### Fixed
+
+- Fix typo in README.
+
 ## [0.4.0] - 2021-05-07
 
 ### Changed
