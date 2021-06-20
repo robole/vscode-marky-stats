@@ -4,6 +4,12 @@ All notable changes to the "Marky Stats" extension will be documented in this fi
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.4.2] - 2021-06-20
+
+### Fixed
+
+- Fixed the initial loading of a value from the settings config.
+
 ## [0.4.1] - 2021-05-08
 
 ### Fixed

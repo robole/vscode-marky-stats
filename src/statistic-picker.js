@@ -9,8 +9,9 @@ class StatisticPicker {
       vscode.StatusBarAlignment.Left,
       10
     );
+    this.configPrefix = "markyMarkdown";
     this.statusBarItem.command = "marky-stats.selectItem";
-    this.selection = 0;
+    this.selection = this.getSelectionIndexFromConfig();
     this.quickPickItems = [];
     this.show();
   }
@@ -99,10 +100,21 @@ class StatisticPicker {
       // eslint-disable-next-line prefer-destructuring
       let label = this.quickPickItems[this.selection].label;
       let key = label.split(":")[0];
-      const marky = vscode.workspace.getConfiguration("markyMarkdown");
+      const marky = vscode.workspace.getConfiguration(this.configPrefix);
       await marky.update("statisticStatusBarItem", key);
     }
   }
+
+  /**
+   * Get the item index based on the value of the "statisticStatusBarItem" option in the configuration.
+   *
+   */
+   getSelectionIndexFromConfig() {
+        const config = vscode.workspace.getConfiguration(this.configPrefix);
+        const value = config.get("statisticStatusBarItem");
+        let index = this.getSelectionIndex(value);
+        return index;
+   }
 
   /**
    * Translate the text to an index for selection of the correct quickpick item.
