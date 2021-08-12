@@ -9,15 +9,19 @@ class ActiveDocument {
    */
   static getWordCount() {
     const editor = vscode.window.activeTextEditor;
-    const text = editor.document.getText();
-    // unicode match for any letter or number
-    let matches = text.match(/[\p{Letter}\p{Number}]+/giu);
 
-    if (matches === null) {
-      return 0;
+    if (editor !== undefined && editor.document !== undefined) {
+      const text = editor.document.getText();
+
+      // unicode match for any letter or number
+      let matches = text.match(/[\p{Letter}\p{Number}]+/giu);
+
+      if (matches !== null) {
+        return matches.length;
+      }
     }
 
-    return matches.length;
+    return 0;
   }
 
   /**
@@ -40,8 +44,13 @@ class ActiveDocument {
    */
   static getCharacterCount() {
     const editor = vscode.window.activeTextEditor;
-    const text = editor.document.getText();
-    return text.length;
+
+    if (editor !== undefined && editor.document !== undefined) {
+      const text = editor.document.getText();
+      return text.length;
+    }
+
+    return 0;
   }
 
   /**
@@ -49,7 +58,13 @@ class ActiveDocument {
    *
    */
   static getLineCount() {
-    return vscode.window.activeTextEditor.document.lineCount;
+    const editor = vscode.window.activeTextEditor;
+
+    if (editor !== undefined && editor.document !== undefined) {
+      return editor.document.lineCount;
+    }
+
+    return 0;
   }
 }
 

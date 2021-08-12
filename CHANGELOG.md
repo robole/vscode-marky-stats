@@ -4,6 +4,12 @@ All notable changes to the "Marky Stats" extension will be documented in this fi
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.4.3] - 2021-08-12
+
+### Changed
+
+- Added checks on `document` to prevent reporting of "document undefined" error. It seems to still occur when the active editor is not a text document, for example when you open an extension's detail page. Therefore, there is no way to prevent this from happening.
+
 ## [0.4.2] - 2021-06-20
 
 ### Fixed

@@ -2,7 +2,7 @@
 const assert = require("assert");
 const path = require("path");
 const vscode = require("vscode");
-const ActiveDocument = require("../../src/active-document");
+const ActiveDocument = require("../../src/activeDocument");
 
 suite("ActiveDocument", () => {
   test("getWordCount for english text", (done) => {
@@ -16,7 +16,6 @@ suite("ActiveDocument", () => {
       },
       (error) => {
         assert.fail(error);
-        done();
       }
     );
   });
@@ -32,7 +31,6 @@ suite("ActiveDocument", () => {
       },
       (error) => {
         assert.fail(error);
-        done();
       }
     );
   });
@@ -48,7 +46,6 @@ suite("ActiveDocument", () => {
       },
       (error) => {
         assert.fail(error);
-        done();
       }
     );
   });
@@ -64,7 +61,6 @@ suite("ActiveDocument", () => {
       },
       (error) => {
         assert.fail(error);
-        done();
       }
     );
   });
@@ -80,7 +76,6 @@ suite("ActiveDocument", () => {
       },
       (error) => {
         assert.fail(error);
-        done();
       }
     );
   });
@@ -96,7 +91,6 @@ suite("ActiveDocument", () => {
       },
       (error) => {
         assert.fail(error);
-        done();
       }
     );
   });

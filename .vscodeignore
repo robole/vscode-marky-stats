@@ -2,6 +2,7 @@
 node_modules
 .vscode-test
 test
+.github
 .gitignore
 **/jsconfig.json
 **/*.map

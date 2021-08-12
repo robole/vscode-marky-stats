@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
 // eslint-disable-next-line import/no-unresolved, node/no-missing-require
 const vscode = require("vscode");
-const activeDoc = require("./active-document");
+const activeDoc = require("./activeDocument");
 
 class StatisticPicker {
   constructor() {
@@ -109,12 +109,12 @@ class StatisticPicker {
    * Get the item index based on the value of the "statisticStatusBarItem" option in the configuration.
    *
    */
-   getSelectionIndexFromConfig() {
-        const config = vscode.workspace.getConfiguration(this.configPrefix);
-        const value = config.get("statisticStatusBarItem");
-        let index = this.getSelectionIndex(value);
-        return index;
-   }
+  getSelectionIndexFromConfig() {
+    const config = vscode.workspace.getConfiguration(this.configPrefix);
+    const value = config.get("statisticStatusBarItem");
+    let index = this.getSelectionIndex(value);
+    return index;
+  }
 
   /**
    * Translate the text to an index for selection of the correct quickpick item.

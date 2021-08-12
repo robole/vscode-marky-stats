@@ -3,7 +3,6 @@
 // @ts-nocheck
 const assert = require("assert");
 const vscode = require("vscode");
-const { getStatisticPicker } = require("../../src/extension");
 
 suite("Statistic Display", () => {
   const extensionID = "robole.marky-stats";
