@@ -168,6 +168,14 @@ class StatisticPicker {
 
     return [panels.READING_TIME, panels.WORDS, panels.LINES, panels.CHARACTERS];
   }
+
+  /**
+   * Select items programmatically. For testing purpose.
+   * @param {*} items - New items.
+   */
+  setSelection(items) {
+    this.selectedItems = items;
+  }
 }
 
 module.exports = StatisticPicker;
