@@ -18,7 +18,9 @@ suite("Statistic Display", () => {
   });
 
   test("Should display a statistic", async () => {
-    const s = extension.exports.getStatisticPicker();
+    var s = extension.exports.getStatisticPicker();
+    s.setSelection("Reading Time");
+    s.update();
     assert.strictEqual(s.getText(), "Reading Time: 1 mins");
   });
 });
