@@ -58,16 +58,25 @@
       "type": "object",
       "title": "Marky Stats",
       "properties": {
-        "markyMarkdown.statisticStatusBarItem": {
-          "type": "string",
-          "default": "Reading Time",
-          "enum": [
-            "Reading Time",
-            "Words",
-            "Lines",
-            "Characters"
-          ],
-          "description": "Choose the statistic item that is shown in the status bar."
+        "markyMarkdown.statsStatusBarShowReadingTime": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show Reading Time in the status bar."
+        },
+        "markyMarkdown.statsStatusBarShowWords": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show Words counter in the status bar."
+        },
+        "markyMarkdown.statsStatusBarShowLines": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show Lines counter in the status bar."
+        },
+        "markyMarkdown.statsStatusBarShowCharacters": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show Characters counter in the status bar."
         }
       }
     }

@@ -8,7 +8,14 @@ const panels = {
   WORDS: "Words",
   LINES: "Lines",
   CHARACTERS: "Characters",
-}
+};
+
+// configuration properties in package.json
+const configPrefix = "markyMarkdown";
+const configShowReadingTime = "statsStatusBarShowReadingTime";
+const configShowWords = "statsStatusBarShowWords";
+const configShowLines = "statsStatusBarShowLines";
+const configShowCharacters = "statsStatusBarShowCharacters";
 
 class StatisticPicker {
   constructor() {
@@ -16,9 +23,8 @@ class StatisticPicker {
       vscode.StatusBarAlignment.Left,
       10
     );
-    this.configPrefix = "markyMarkdown";
     this.statusBarItem.command = "marky-stats.selectItem";
-    this.selection = this.getSelectionNameFromConfig();
+    this.selectedItems = this.readSettings();
     this.quickPickItems = [];
     this.show();
   }
@@ -44,8 +50,16 @@ class StatisticPicker {
       label: `Characters: ${activeDoc.getCharacterCount()}`,
     };
 
-    var quickPickItem = this.getQuickPickItemByName(this.selection);
-    this.statusBarItem.text = quickPickItem.label;
+    var filteredItems = this.quickPickItems.filter(
+      (x) => this.selectedItems.indexOf(x.name) >= 0
+    );
+
+    filteredItems.forEach(function (item, index) {
+      item.picked = true;
+    });
+
+    var label = filteredItems.map((x) => x.label).join("|");
+    this.statusBarItem.text = label;
   }
 
   /**
@@ -83,15 +97,15 @@ class StatisticPicker {
    */
   selectItem() {
     let quickPick = vscode.window.showQuickPick(this.quickPickItems, {
-      canPickMany: false,
+      canPickMany: true,
       placeHolder: "Select a statistic to display",
     });
 
     const statBarItem = this;
     quickPick.then(function (fufilled) {
       if (fufilled) {
-        statBarItem.selection = fufilled.name;
-        statBarItem.save().then(function () {
+        statBarItem.selectedItems = fufilled.map((x) => x.name);
+        statBarItem.saveSettings().then(function () {
           statBarItem.update();
         });
       }
@@ -99,13 +113,28 @@ class StatisticPicker {
   }
 
   /**
-   * Save the current selection to the workspace configuration. The key from the text is saved e.g. "Reading Time".
+   * Save the current selection to the workspace configuration.
    *
    */
-  async save() {
+  async saveSettings() {
     if (vscode.workspace.name !== undefined) {
-      const marky = vscode.workspace.getConfiguration(this.configPrefix);
-      await marky.update("statisticStatusBarItem", this.selection);
+      const marky = vscode.workspace.getConfiguration(configPrefix);
+      await marky.update(
+        configShowReadingTime,
+        this.selectedItems.indexOf(panels.READING_TIME) >= 0
+      );
+      await marky.update(
+        configShowWords,
+        this.selectedItems.indexOf(panels.WORDS) >= 0
+      );
+      await marky.update(
+        configShowLines,
+        this.selectedItems.indexOf(panels.LINES) >= 0
+      );
+      await marky.update(
+        configShowCharacters,
+        this.selectedItems.indexOf(panels.CHARACTERS) >= 0
+      );
     }
   }
 
@@ -113,32 +142,31 @@ class StatisticPicker {
    * Get the item name from the value of the "statisticStatusBarItem" option in the configuration.
    *
    */
-  getSelectionNameFromConfig() {
-    const config = vscode.workspace.getConfiguration(this.configPrefix);
-    const value = config.get("statisticStatusBarItem");
+  readSettings() {
+    const config = vscode.workspace.getConfiguration(configPrefix);
+    var result = [];
 
-    var panelNames = [panels.READING_TIME, panels.WORDS, panels.LINES, panels.CHARACTERS];
-
-    if (panelNames.indexOf(value) >= 0) {
-      return value;
+    if (config.get(configShowReadingTime)) {
+      result.push(panels.READING_TIME);
     }
 
-    return panels.READING_TIME;
-  }
-
-  /**
-   * Gets one of quickPickItems by name
-   * @param {*} name - name of quickPickItem
-   * @returns quickPickItem
-   */
-  getQuickPickItemByName(name) {
-    var item = this.quickPickItems.find(x => x.name === name);
-
-    if (item) {
-      return item;
+    if (config.get(configShowWords)) {
+      result.push(panels.WORDS);
     }
 
-    return this.quickPickItems[0];
+    if (config.get(configShowLines)) {
+      result.push(panels.LINES);
+    }
+
+    if (config.get(configShowCharacters)) {
+      result.push(panels.CHARACTERS);
+    }
+
+    if (result.length > 0) {
+      return result;
+    }
+
+    return [panels.READING_TIME, panels.WORDS, panels.LINES, panels.CHARACTERS];
   }
 }
 
