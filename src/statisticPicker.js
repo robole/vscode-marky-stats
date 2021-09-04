@@ -120,15 +120,11 @@ class StatisticPicker {
    * Translate the text to an index for selection of the correct quickpick item.
    */
   getSelectionIndex(text) {
-    let index = 0;
-    if (text.startsWith("Reading")) {
+    var names = ["Reading", "Words", "Lines", "Characters"];
+    var index = names.indexOf(text);
+
+    if (index < 0) {
       index = 0;
-    } else if (text.startsWith("Word")) {
-      index = 1;
-    } else if (text.startsWith("Line")) {
-      index = 2;
-    } else if (text.startsWith("Character")) {
-      index = 3;
     }
 
     return index;
