@@ -39,9 +39,13 @@ The extension is only loaded when a markdown file is open. To be more specific, 
 
 ## Settings
 
-| Name              | Type   | Enum Values                                    | Default        | Description                                                |
-| ----------------- | ------ | ---------------------------------------------- | -------------- | ---------------------------------------------------------- |
-| Marky Markdown: Statistic Status Bar Item | String | "Reading Time", "Words", "Lines", "Characters" | "Reading Time" | Choose the statistic item that is shown in the status bar. |
+| Name                                               | Type    | Default | Description                                            |
+| -------------------------------------------------- | ------- | ------- | ------------------------------------------------------ |
+| Marky Markdown: Stats Status Bar Show Reading Time | Boolean | true    | Enable showing "Reading Time" on the status bar.       |
+| Marky Markdown: Stats Status Bar Show Words        | Boolean | false   | Enable showing "Words" counter on the status bar.      |
+| Marky Markdown: Stats Status Bar Show Lines        | Boolean | false   | Enable showing "Lines" counter on the status bar.      |
+| Marky Markdown: Stats Status Bar Show Characters   | Boolean | false   | Enable showing "Characters" counter on the status bar. |
+| Marky Markdown: Stats Status Bar Labels Separator  | String  | "  "    | Separator between items on status bar.                 |
 
 ## Installation
 

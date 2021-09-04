@@ -3,15 +3,29 @@
 const vscode = require("vscode");
 const activeDoc = require("./activeDocument");
 
+const labels = {
+  READING_TIME: "Reading Time",
+  WORDS: "Words",
+  LINES: "Lines",
+  CHARACTERS: "Characters",
+};
+
+// configuration properties in package.json
+const configPrefix = "markyMarkdown";
+const configShowReadingTime = "statsStatusBarShowReadingTime";
+const configShowWords = "statsStatusBarShowWords";
+const configShowLines = "statsStatusBarShowLines";
+const configShowCharacters = "statsStatusBarShowCharacters";
+const configSeparator = "statsStatusBarLabelsSeparator";
+
 class StatisticPicker {
   constructor() {
     this.statusBarItem = vscode.window.createStatusBarItem(
       vscode.StatusBarAlignment.Left,
       10
     );
-    this.configPrefix = "markyMarkdown";
     this.statusBarItem.command = "marky-stats.selectItem";
-    this.selection = this.getSelectionIndexFromConfig();
+    this.readSettings();
     this.quickPickItems = [];
     this.show();
   }
@@ -21,24 +35,32 @@ class StatisticPicker {
    */
   update() {
     this.quickPickItems[0] = {
-      selection: 0,
+      name: labels.READING_TIME,
       label: `Reading Time: ${activeDoc.getReadingTime()} mins`,
     };
     this.quickPickItems[1] = {
-      selection: 1,
+      name: labels.WORDS,
       label: `Words: ${activeDoc.getWordCount()}`,
     };
     this.quickPickItems[2] = {
-      selection: 2,
+      name: labels.LINES,
       label: `Lines: ${activeDoc.getLineCount()}`,
     };
     this.quickPickItems[3] = {
-      selection: 3,
+      name: labels.CHARACTERS,
       label: `Characters: ${activeDoc.getCharacterCount()}`,
     };
 
-    this.quickPickItems[this.selection].picked = true;
-    this.statusBarItem.text = this.quickPickItems[this.selection].label;
+    var filteredItems = this.quickPickItems.filter(
+      (x) => this.selectedItems.indexOf(x.name) >= 0
+    );
+
+    filteredItems.forEach(function (item, index) {
+      item.picked = true;
+    });
+
+    var label = filteredItems.map((x) => x.label).join(this.separator);
+    this.statusBarItem.text = label;
   }
 
   /**
@@ -76,15 +98,16 @@ class StatisticPicker {
    */
   selectItem() {
     let quickPick = vscode.window.showQuickPick(this.quickPickItems, {
-      canPickMany: false,
+      canPickMany: true,
       placeHolder: "Select a statistic to display",
     });
 
     const statBarItem = this;
     quickPick.then(function (fufilled) {
       if (fufilled) {
-        statBarItem.selection = fufilled.selection;
-        statBarItem.save().then(function () {
+        var newItems = fufilled.map((x) => x.name);
+        statBarItem.selectedItems = statBarItem.controlEmptiness(newItems);
+        statBarItem.saveSettings().then(function () {
           statBarItem.update();
         });
       }
@@ -92,46 +115,83 @@ class StatisticPicker {
   }
 
   /**
-   * Save the current selection to the workspace configuration. The key from the text is saved e.g. "Reading Time".
+   * Save the current settings to the workspace configuration.
    *
    */
-  async save() {
+  async saveSettings() {
     if (vscode.workspace.name !== undefined) {
-      // eslint-disable-next-line prefer-destructuring
-      let label = this.quickPickItems[this.selection].label;
-      let key = label.split(":")[0];
-      const marky = vscode.workspace.getConfiguration(this.configPrefix);
-      await marky.update("statisticStatusBarItem", key);
+      const marky = vscode.workspace.getConfiguration(configPrefix);
+      await marky.update(
+        configShowReadingTime,
+        this.selectedItems.indexOf(labels.READING_TIME) >= 0
+      );
+      await marky.update(
+        configShowWords,
+        this.selectedItems.indexOf(labels.WORDS) >= 0
+      );
+      await marky.update(
+        configShowLines,
+        this.selectedItems.indexOf(labels.LINES) >= 0
+      );
+      await marky.update(
+        configShowCharacters,
+        this.selectedItems.indexOf(labels.CHARACTERS) >= 0
+      );
+      await marky.update(configSeparator, this.separator);
     }
   }
 
   /**
-   * Get the item index based on the value of the "statisticStatusBarItem" option in the configuration.
+   * Get the settings from the workspace configuration.
    *
    */
-  getSelectionIndexFromConfig() {
-    const config = vscode.workspace.getConfiguration(this.configPrefix);
-    const value = config.get("statisticStatusBarItem");
-    let index = this.getSelectionIndex(value);
-    return index;
+  readSettings() {
+    const config = vscode.workspace.getConfiguration(configPrefix);
+    var settItems = [];
+
+    if (config.get(configShowReadingTime)) {
+      settItems.push(labels.READING_TIME);
+    }
+
+    if (config.get(configShowWords)) {
+      settItems.push(labels.WORDS);
+    }
+
+    if (config.get(configShowLines)) {
+      settItems.push(labels.LINES);
+    }
+
+    if (config.get(configShowCharacters)) {
+      settItems.push(labels.CHARACTERS);
+    }
+
+    this.selectedItems = this.controlEmptiness(settItems);
+
+    var settSeparator = config.get(configSeparator);
+
+    if (settSeparator === undefined) {
+      settSeparator = "  ";
+    }
+
+    this.separator = settSeparator;
   }
 
   /**
-   * Translate the text to an index for selection of the correct quickpick item.
+   * Select items programmatically. For testing purpose.
+   * @param {*} items - New items.
    */
-  getSelectionIndex(text) {
-    let index = 0;
-    if (text.startsWith("Reading")) {
-      index = 0;
-    } else if (text.startsWith("Word")) {
-      index = 1;
-    } else if (text.startsWith("Line")) {
-      index = 2;
-    } else if (text.startsWith("Character")) {
-      index = 3;
-    }
+  setSelection(items) {
+    this.selectedItems = items;
+  }
 
-    return index;
+  /**
+   * Replace empty list of selected items with default value.
+   */
+  controlEmptiness(items) {
+    if (items.length === 0) {
+      items = [labels.READING_TIME];
+    }
+    return items;
   }
 }
 
