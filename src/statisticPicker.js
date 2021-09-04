@@ -58,7 +58,7 @@ class StatisticPicker {
       item.picked = true;
     });
 
-    var label = filteredItems.map((x) => x.label).join("|");
+    var label = filteredItems.map((x) => x.label).join(" | ");
     this.statusBarItem.text = label;
   }
 
