@@ -45,6 +45,7 @@ The extension is only loaded when a markdown file is open. To be more specific, 
 | Marky Markdown: Stats Status Bar Show Words        | Boolean | false   | Enable showing "Words" counter on the status bar.      |
 | Marky Markdown: Stats Status Bar Show Lines        | Boolean | false   | Enable showing "Lines" counter on the status bar.      |
 | Marky Markdown: Stats Status Bar Show Characters   | Boolean | false   | Enable showing "Characters" counter on the status bar. |
+| Marky Markdown: Stats Status Bar Labels Separator  | String  | "  "    | Separator between items on status bar.                 |
 
 ## Installation
 

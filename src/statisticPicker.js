@@ -16,6 +16,7 @@ const configShowReadingTime = "statsStatusBarShowReadingTime";
 const configShowWords = "statsStatusBarShowWords";
 const configShowLines = "statsStatusBarShowLines";
 const configShowCharacters = "statsStatusBarShowCharacters";
+const configSeparator = "statsStatusBarLabelsSeparator";
 
 class StatisticPicker {
   constructor() {
@@ -24,7 +25,7 @@ class StatisticPicker {
       10
     );
     this.statusBarItem.command = "marky-stats.selectItem";
-    this.selectedItems = this.readSettings();
+    this.readSettings();
     this.quickPickItems = [];
     this.show();
   }
@@ -58,7 +59,7 @@ class StatisticPicker {
       item.picked = true;
     });
 
-    var label = filteredItems.map((x) => x.label).join(" | ");
+    var label = filteredItems.map((x) => x.label).join(this.separator);
     this.statusBarItem.text = label;
   }
 
@@ -113,7 +114,7 @@ class StatisticPicker {
   }
 
   /**
-   * Save the current selection to the workspace configuration.
+   * Save the current settings to the workspace configuration.
    *
    */
   async saveSettings() {
@@ -135,38 +136,52 @@ class StatisticPicker {
         configShowCharacters,
         this.selectedItems.indexOf(labels.CHARACTERS) >= 0
       );
+      await marky.update(configSeparator, this.separator);
     }
   }
 
   /**
-   * Get the item name from the value of the "statisticStatusBarItem" option in the configuration.
+   * Get the settings from the workspace configuration.
    *
    */
   readSettings() {
     const config = vscode.workspace.getConfiguration(configPrefix);
-    var result = [];
+    var settItems = [];
 
     if (config.get(configShowReadingTime)) {
-      result.push(labels.READING_TIME);
+      settItems.push(labels.READING_TIME);
     }
 
     if (config.get(configShowWords)) {
-      result.push(labels.WORDS);
+      settItems.push(labels.WORDS);
     }
 
     if (config.get(configShowLines)) {
-      result.push(labels.LINES);
+      settItems.push(labels.LINES);
     }
 
     if (config.get(configShowCharacters)) {
-      result.push(labels.CHARACTERS);
+      settItems.push(labels.CHARACTERS);
     }
 
-    if (result.length > 0) {
-      return result;
+    if (settItems.length === 0) {
+      settItems = [
+        labels.READING_TIME,
+        labels.WORDS,
+        labels.LINES,
+        labels.CHARACTERS,
+      ];
     }
 
-    return [labels.READING_TIME, labels.WORDS, labels.LINES, labels.CHARACTERS];
+    this.selectedItems = settItems;
+
+    var settSeparator = config.get(configSeparator);
+
+    if (settSeparator === undefined) {
+      settSeparator = "  ";
+    }
+
+    this.separator = settSeparator;
   }
 
   /**

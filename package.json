@@ -77,6 +77,11 @@
           "type": "boolean",
           "default": false,
           "description": "Enable showing \"Characters\" counter on the status bar."
+        },
+        "markyMarkdown.statsStatusBarLabelsSeparator": {
+          "type": "string",
+          "default": "  ",
+          "description": "Separator between items on status bar."
         }
       }
     }
