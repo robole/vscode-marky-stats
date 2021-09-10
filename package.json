@@ -61,22 +61,22 @@
         "markyMarkdown.statsStatusBarShowReadingTime": {
           "type": "boolean",
           "default": true,
-          "description": "Show Reading Time in the status bar."
+          "description": "Enable showing \"Reading Time\" on the status bar."
         },
         "markyMarkdown.statsStatusBarShowWords": {
           "type": "boolean",
           "default": false,
-          "description": "Show Words counter in the status bar."
+          "description": "Enable showing \"Words\" counter on the status bar."
         },
         "markyMarkdown.statsStatusBarShowLines": {
           "type": "boolean",
           "default": false,
-          "description": "Show Lines counter in the status bar."
+          "description": "Enable showing \"Lines\" counter on the status bar."
         },
         "markyMarkdown.statsStatusBarShowCharacters": {
           "type": "boolean",
           "default": false,
-          "description": "Show Characters counter in the status bar."
+          "description": "Enable showing \"Characters\" counter on the status bar."
         }
       }
     }
