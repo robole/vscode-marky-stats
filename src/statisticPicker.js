@@ -105,7 +105,8 @@ class StatisticPicker {
     const statBarItem = this;
     quickPick.then(function (fufilled) {
       if (fufilled) {
-        statBarItem.selectedItems = fufilled.map((x) => x.name);
+        var newItems = fufilled.map((x) => x.name);
+        statBarItem.selectedItems = statBarItem.controlEmptiness(newItems);
         statBarItem.saveSettings().then(function () {
           statBarItem.update();
         });
@@ -164,16 +165,7 @@ class StatisticPicker {
       settItems.push(labels.CHARACTERS);
     }
 
-    if (settItems.length === 0) {
-      settItems = [
-        labels.READING_TIME,
-        labels.WORDS,
-        labels.LINES,
-        labels.CHARACTERS,
-      ];
-    }
-
-    this.selectedItems = settItems;
+    this.selectedItems = this.controlEmptiness(settItems);
 
     var settSeparator = config.get(configSeparator);
 
@@ -190,6 +182,16 @@ class StatisticPicker {
    */
   setSelection(items) {
     this.selectedItems = items;
+  }
+
+  /**
+   * Replace empty list of selected items with default value.
+   */
+  controlEmptiness(items) {
+    if (items.length === 0) {
+      items = [labels.READING_TIME];
+    }
+    return items;
   }
 }
 
