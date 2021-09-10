@@ -81,7 +81,7 @@
         "markyMarkdown.statsStatusBarLabelsSeparator": {
           "type": "string",
           "default": "  ",
-          "description": "Separator between items on status bar."
+          "description": "Separator between items on the status bar."
         }
       }
     }
