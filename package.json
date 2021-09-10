@@ -65,17 +65,17 @@
         },
         "markyMarkdown.statsStatusBarShowWords": {
           "type": "boolean",
-          "default": true,
+          "default": false,
           "description": "Show Words counter in the status bar."
         },
         "markyMarkdown.statsStatusBarShowLines": {
           "type": "boolean",
-          "default": true,
+          "default": false,
           "description": "Show Lines counter in the status bar."
         },
         "markyMarkdown.statsStatusBarShowCharacters": {
           "type": "boolean",
-          "default": true,
+          "default": false,
           "description": "Show Characters counter in the status bar."
         }
       }

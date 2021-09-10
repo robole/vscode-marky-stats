@@ -3,7 +3,7 @@
 const vscode = require("vscode");
 const activeDoc = require("./activeDocument");
 
-const panels = {
+const labels = {
   READING_TIME: "Reading Time",
   WORDS: "Words",
   LINES: "Lines",
@@ -34,19 +34,19 @@ class StatisticPicker {
    */
   update() {
     this.quickPickItems[0] = {
-      name: panels.READING_TIME,
+      name: labels.READING_TIME,
       label: `Reading Time: ${activeDoc.getReadingTime()} mins`,
     };
     this.quickPickItems[1] = {
-      name: panels.WORDS,
+      name: labels.WORDS,
       label: `Words: ${activeDoc.getWordCount()}`,
     };
     this.quickPickItems[2] = {
-      name: panels.LINES,
+      name: labels.LINES,
       label: `Lines: ${activeDoc.getLineCount()}`,
     };
     this.quickPickItems[3] = {
-      name: panels.CHARACTERS,
+      name: labels.CHARACTERS,
       label: `Characters: ${activeDoc.getCharacterCount()}`,
     };
 
@@ -121,19 +121,19 @@ class StatisticPicker {
       const marky = vscode.workspace.getConfiguration(configPrefix);
       await marky.update(
         configShowReadingTime,
-        this.selectedItems.indexOf(panels.READING_TIME) >= 0
+        this.selectedItems.indexOf(labels.READING_TIME) >= 0
       );
       await marky.update(
         configShowWords,
-        this.selectedItems.indexOf(panels.WORDS) >= 0
+        this.selectedItems.indexOf(labels.WORDS) >= 0
       );
       await marky.update(
         configShowLines,
-        this.selectedItems.indexOf(panels.LINES) >= 0
+        this.selectedItems.indexOf(labels.LINES) >= 0
       );
       await marky.update(
         configShowCharacters,
-        this.selectedItems.indexOf(panels.CHARACTERS) >= 0
+        this.selectedItems.indexOf(labels.CHARACTERS) >= 0
       );
     }
   }
@@ -147,26 +147,26 @@ class StatisticPicker {
     var result = [];
 
     if (config.get(configShowReadingTime)) {
-      result.push(panels.READING_TIME);
+      result.push(labels.READING_TIME);
     }
 
     if (config.get(configShowWords)) {
-      result.push(panels.WORDS);
+      result.push(labels.WORDS);
     }
 
     if (config.get(configShowLines)) {
-      result.push(panels.LINES);
+      result.push(labels.LINES);
     }
 
     if (config.get(configShowCharacters)) {
-      result.push(panels.CHARACTERS);
+      result.push(labels.CHARACTERS);
     }
 
     if (result.length > 0) {
       return result;
     }
 
-    return [panels.READING_TIME, panels.WORDS, panels.LINES, panels.CHARACTERS];
+    return [labels.READING_TIME, labels.WORDS, labels.LINES, labels.CHARACTERS];
   }
 
   /**
