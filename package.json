@@ -6,7 +6,7 @@
   "author": {
     "name": "Rob O'Leary"
   },
-  "version": "0.4.3",
+  "version": "0.5.0",
   "engines": {
     "vscode": "^1.48.0",
     "node": ">=10.0.0"
@@ -58,30 +58,37 @@
       "type": "object",
       "title": "Marky Stats",
       "properties": {
-        "markyMarkdown.statsStatusBarShowReadingTime": {
+        "markyMarkdown.statsWordsPerMinute": {
+          "type": "integer",
+          "default": 250,
+          "description": "Set the words per minute that is used to calculate \"Reading Time\".",
+          "minimum": 1,
+          "maximum": 100000
+        },
+        "markyMarkdown.statsShowReadingTime": {
           "type": "boolean",
           "default": true,
-          "description": "Enable showing \"Reading Time\" on the status bar."
+          "description": "Show \"Reading Time\" on the status bar."
         },
-        "markyMarkdown.statsStatusBarShowWords": {
+        "markyMarkdown.statsShowWords": {
           "type": "boolean",
           "default": false,
-          "description": "Enable showing \"Words\" counter on the status bar."
+          "description": "Show \"Words\" counter on the status bar."
         },
-        "markyMarkdown.statsStatusBarShowLines": {
+        "markyMarkdown.statsShowLines": {
           "type": "boolean",
           "default": false,
-          "description": "Enable showing \"Lines\" counter on the status bar."
+          "description": "Show \"Lines\" counter on the status bar."
         },
-        "markyMarkdown.statsStatusBarShowCharacters": {
+        "markyMarkdown.statsShowCharacters": {
           "type": "boolean",
           "default": false,
-          "description": "Enable showing \"Characters\" counter on the status bar."
+          "description": "Show \"Characters\" counter on the status bar."
         },
-        "markyMarkdown.statsStatusBarLabelsSeparator": {
+        "markyMarkdown.statsItemSeparator": {
           "type": "string",
           "default": "  ",
-          "description": "Separator between items on the status bar."
+          "description": "Separator between items on the status bar. The default value is 2 blank spaces."
         }
       }
     }
@@ -94,7 +101,7 @@
     "webpack": "webpack --mode development",
     "webpack-dev": "webpack --mode development --watch",
     "vscode:prepublish": "webpack --mode production",
-    "build": "vsce package ."
+    "build": "vsce package"
   },
   "devDependencies": {
     "@types/glob": "^7.1.1",

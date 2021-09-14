@@ -2,6 +2,7 @@
 // eslint-disable-next-line import/no-unresolved, node/no-missing-require
 const vscode = require("vscode");
 const activeDoc = require("./activeDocument");
+const config = require("./configuration");
 
 const labels = {
   READING_TIME: "Reading Time",
@@ -10,23 +11,20 @@ const labels = {
   CHARACTERS: "Characters",
 };
 
-// configuration properties in package.json
-const configPrefix = "markyMarkdown";
-const configShowReadingTime = "statsStatusBarShowReadingTime";
-const configShowWords = "statsStatusBarShowWords";
-const configShowLines = "statsStatusBarShowLines";
-const configShowCharacters = "statsStatusBarShowCharacters";
-const configSeparator = "statsStatusBarLabelsSeparator";
-
 class StatisticPicker {
   constructor() {
+    this.quickPickItems = [];
+    this.selectedItems = [];
+    this.selectionChangeEvent = false;
+
+    this.loadSettings();
+
     this.statusBarItem = vscode.window.createStatusBarItem(
       vscode.StatusBarAlignment.Left,
-      10
+      10000
     );
     this.statusBarItem.command = "marky-stats.selectItem";
-    this.readSettings();
-    this.quickPickItems = [];
+
     this.show();
   }
 
@@ -36,22 +34,22 @@ class StatisticPicker {
   update() {
     this.quickPickItems[0] = {
       name: labels.READING_TIME,
-      label: `Reading Time: ${activeDoc.getReadingTime()} mins`,
+      label: `${labels.READING_TIME}: ${activeDoc.getReadingTime()} mins`,
     };
     this.quickPickItems[1] = {
       name: labels.WORDS,
-      label: `Words: ${activeDoc.getWordCount()}`,
+      label: `${labels.WORDS}: ${activeDoc.getWordCount()}`,
     };
     this.quickPickItems[2] = {
       name: labels.LINES,
-      label: `Lines: ${activeDoc.getLineCount()}`,
+      label: `${labels.LINES}: ${activeDoc.getLineCount()}`,
     };
     this.quickPickItems[3] = {
       name: labels.CHARACTERS,
-      label: `Characters: ${activeDoc.getCharacterCount()}`,
+      label: `${labels.CHARACTERS}: ${activeDoc.getCharacterCount()}`,
     };
 
-    var filteredItems = this.quickPickItems.filter(
+    let filteredItems = this.quickPickItems.filter(
       (x) => this.selectedItems.indexOf(x.name) >= 0
     );
 
@@ -59,7 +57,9 @@ class StatisticPicker {
       item.picked = true;
     });
 
-    var label = filteredItems.map((x) => x.label).join(this.separator);
+    // if no selection is made, this is an empty string
+    let label = filteredItems.map((x) => x.label).join(this.itemSeparator);
+
     this.statusBarItem.text = label;
   }
 
@@ -96,20 +96,22 @@ class StatisticPicker {
    * Show a quick pick selection of the statistics for the active document. The selection will change the display text.
    *
    */
-  selectItem() {
+  async selectItem() {
     let quickPick = vscode.window.showQuickPick(this.quickPickItems, {
       canPickMany: true,
       placeHolder: "Select a statistic to display",
     });
 
-    const statBarItem = this;
-    quickPick.then(function (fufilled) {
+    const statPicker = this;
+    quickPick.then(async function (fufilled) {
       if (fufilled) {
-        var newItems = fufilled.map((x) => x.name);
-        statBarItem.selectedItems = statBarItem.controlEmptiness(newItems);
-        statBarItem.saveSettings().then(function () {
-          statBarItem.update();
-        });
+        var newSelections = fufilled.map((x) => x.name);
+        statPicker.selectedItems = newSelections;
+
+        statPicker.selectionChangeEvent = true;
+        await statPicker.saveSettings();
+        statPicker.update();
+        statPicker.selectionChangeEvent = false;
       }
     });
   }
@@ -119,79 +121,71 @@ class StatisticPicker {
    *
    */
   async saveSettings() {
-    if (vscode.workspace.name !== undefined) {
-      const marky = vscode.workspace.getConfiguration(configPrefix);
-      await marky.update(
-        configShowReadingTime,
-        this.selectedItems.indexOf(labels.READING_TIME) >= 0
-      );
-      await marky.update(
-        configShowWords,
-        this.selectedItems.indexOf(labels.WORDS) >= 0
-      );
-      await marky.update(
-        configShowLines,
-        this.selectedItems.indexOf(labels.LINES) >= 0
-      );
-      await marky.update(
-        configShowCharacters,
-        this.selectedItems.indexOf(labels.CHARACTERS) >= 0
-      );
-      await marky.update(configSeparator, this.separator);
-    }
+    await config.updateShowReadingTime(
+      this.selectedItems.indexOf(labels.READING_TIME) >= 0
+    );
+
+    await config.updateShowWords(this.selectedItems.indexOf(labels.WORDS) >= 0);
+
+    await config.updateShowLines(this.selectedItems.indexOf(labels.LINES) >= 0);
+
+    await config.updateShowCharacters(
+      this.selectedItems.indexOf(labels.CHARACTERS) >= 0
+    );
+
+    await config.updateItemSeparator(this.itemSeparator);
   }
 
   /**
    * Get the settings from the workspace configuration.
    *
    */
-  readSettings() {
-    const config = vscode.workspace.getConfiguration(configPrefix);
-    var settItems = [];
+  loadSettings() {
+    let selectedItems = [];
 
-    if (config.get(configShowReadingTime)) {
-      settItems.push(labels.READING_TIME);
+    if (config.getShowReadingTime() === true) {
+      selectedItems.push(labels.READING_TIME);
     }
 
-    if (config.get(configShowWords)) {
-      settItems.push(labels.WORDS);
+    if (config.getShowWords() === true) {
+      selectedItems.push(labels.WORDS);
     }
 
-    if (config.get(configShowLines)) {
-      settItems.push(labels.LINES);
+    if (config.getShowLines() === true) {
+      selectedItems.push(labels.LINES);
     }
 
-    if (config.get(configShowCharacters)) {
-      settItems.push(labels.CHARACTERS);
+    if (config.getShowCharacters() === true) {
+      selectedItems.push(labels.CHARACTERS);
     }
 
-    this.selectedItems = this.controlEmptiness(settItems);
+    this.selectedItems = selectedItems;
 
-    var settSeparator = config.get(configSeparator);
-
-    if (settSeparator === undefined) {
-      settSeparator = "  ";
-    }
-
-    this.separator = settSeparator;
+    this.itemSeparator = config.getItemSeparator();
   }
 
   /**
-   * Select items programmatically. For testing purpose.
-   * @param {*} items - New items.
+   * Set selected statistic items. Only used for testing in this context.
+   * @param {[]} items - Statistic items that correspond to the labels e.g. "Reading Time".
    */
-  setSelection(items) {
+  setSelectedItems(items) {
     this.selectedItems = items;
   }
 
   /**
-   * Replace empty list of selected items with default value.
+   * Set the text that separates each statistic item. Only used for testing in this context.
+   * @param {string} newValue - The text that separates each statistic item.
    */
-  controlEmptiness(items) {
-    if (items.length === 0) {
-      items = [labels.READING_TIME];
-    }
-    return items;
+  async setItemSeparator(newValue) {
+    this.itemSeparator = newValue;
+  }
+
+  /**
+   * Has the user clicked on the status bar item to change the statistics selected.
+   *
+   */
+  isSelectionChangeEvent() {
+    return this.selectionChangeEvent;
   }
 }
 

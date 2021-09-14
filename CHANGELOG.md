@@ -4,6 +4,24 @@ All notable changes to the "Marky Stats" extension will be documented in this fi
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.5.0] - 2021-09-14
+
+### Added
+
+- Added setting `Stat Words Per Minute` to enable the calculation of reading time to be adjusted.
+- Added capability to display multiple statistics by adding the following settings:
+	1. `Stat Show Reading Time`.
+	1. `Stat Show Words`.
+	1. `Stat Show Characters`.
+	1. `Stat Show Lines`.
+- Added event handler for `onDidChangeActiveTextEditor` to *extension.js* to ensure that config changes are reflected immediately.
+- Added more tests to *activeDocument.test.js* and *statisticPicker.test.js*.
+
+### Changed
+
+- Replaced the setting `Statistic Status Bar Item` with mutliple settings as listed above.
+- Refactored code for handling configuration. Now, quickpick changes user settings, before it was changing workspace settings.
+
 ## [0.4.3] - 2021-08-12
 
 ### Changed

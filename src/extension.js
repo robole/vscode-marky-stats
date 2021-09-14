@@ -1,6 +1,7 @@
 // eslint-disable-next-line import/no-unresolved, node/no-missing-require
 const vscode = require("vscode");
 const StatisticPicker = require("./statisticPicker");
+const Configuration = require("./configuration");
 
 module.exports = {
   activate,
@@ -18,6 +19,16 @@ function activate(context) {
     }),
     vscode.workspace.onDidChangeTextDocument(function (e) {
       if (e.document && e.document.languageId === "markdown") {
+        statisticPicker.update();
+      }
+    }),
+    vscode.workspace.onDidChangeConfiguration(function (e) {
+      // update only if it was a marky markdown setting was changed directly in the config file
+      if (
+        statisticPicker.isSelectionChangeEvent() === false &&
+        e.affectsConfiguration(Configuration.getPrefix())
+      ) {
+        statisticPicker.loadSettings(); //"reload" setttings
         statisticPicker.update();
       }
     }),
