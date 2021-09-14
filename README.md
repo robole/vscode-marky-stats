@@ -41,11 +41,12 @@ The extension is only loaded when a markdown file is open. To be more specific, 
 
 | Name                                               | Type    | Default | Description                                            |
 | -------------------------------------------------- | ------- | ------- | ------------------------------------------------------ |
+| Marky Markdown: Stats Words Per Minute | Integer | 250    | Set the words per minute that is used to calculate "Reading Time".      |
 | Marky Markdown: Stats Show Reading Time | Boolean | true    | Show "Reading Time" on the status bar.       |
 | Marky Markdown: Stats Show Words        | Boolean | false   | Show "Words" counter on the status bar.      |
 | Marky Markdown: Stats Show Lines        | Boolean | false   | Show "Lines" counter on the status bar.      |
 | Marky Markdown: Stats Show Characters   | Boolean | false   | Show "Characters" counter on the status bar. |
-| Marky Markdown: Stats Item Separator  | String  | '  '    | Separator between items on status bar.                 |
+| Marky Markdown: Stats Item Separator  | String  | 2 empty spaces | Separator between items on status bar.                 |
 
 ## Installation
 

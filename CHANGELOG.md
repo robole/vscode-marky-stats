@@ -4,6 +4,13 @@ All notable changes to the "Marky Stats" extension will be documented in this fi
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.5.1] - 2021-09-15
+
+### Changed
+
+- Add `Marky Markdown: Stats Words Per Minute` to Settings section in README.
+- Centered example.gif in README.
+
 ## [0.5.0] - 2021-09-14
 
 ### Added
