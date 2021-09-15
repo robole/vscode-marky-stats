@@ -41,12 +41,13 @@ The extension is only loaded when a markdown file is open. To be more specific, 
 
 | Name                                               | Type    | Default | Description                                            |
 | -------------------------------------------------- | ------- | ------- | ------------------------------------------------------ |
-| Marky Markdown: Stats Words Per Minute | Integer | 250    | Set the words per minute that is used to calculate "Reading Time".      |
 | Marky Markdown: Stats Show Reading Time | Boolean | true    | Show "Reading Time" on the status bar.       |
 | Marky Markdown: Stats Show Words        | Boolean | false   | Show "Words" counter on the status bar.      |
 | Marky Markdown: Stats Show Lines        | Boolean | false   | Show "Lines" counter on the status bar.      |
 | Marky Markdown: Stats Show Characters   | Boolean | false   | Show "Characters" counter on the status bar. |
-| Marky Markdown: Stats Item Separator  | String  | 2 empty spaces | Separator between items on status bar.                 |
+| Marky Markdown: Stats Item Separator  | String  | 2 spaces | Separator between items on status bar.                 |
+| Marky Markdown: Stats Words Per Minute | Integer | 250    | Set the words per minute that is used to calculate "Reading Time".      |
+| Marky Markdown: Stats Alignment | String (enum) | "Left"   | Set the position on the status bar. **Requires restart of VS Code to show new position.**     |
 
 ## Installation
 
@@ -64,7 +65,7 @@ I consider this extension feature complete. You are welcome to raise an issue an
 
 If you are happy with the extension, please star the repo, and leave a review to help others find it. 🌟🌟🌟🌟🌟
 
-You can show appreciation by [buying me a coffee](https://ko-fi.com/roboleary).
+You can show appreciation by [buying me a coffee or sponsoring me](https://ko-fi.com/roboleary). This will enable me to dedicate more time to open-source.
 
 <p align="center">
 <a href="https://ko-fi.com/roboleary"><img src="img/coffee.png" alt="buy me a coffee"></a>
@@ -77,7 +78,3 @@ You can show appreciation by [buying me a coffee](https://ko-fi.com/roboleary).
 On a crowded status bar, the Marky Stats may have been forced out! You can test this by zooming out, so the text becomes very small, and you will see more items on the status bar.
 
 Go to the User Settings, and hide or disable other status bar items to make space.
-
-### Can I change the location of the item in the Status Bar?
-
-There is an `alignment` field in the API that can position the item on the left-hand side or right-hand side of the status bar. I haven't included it as an extension setting because `alignment` is a read-only property. You can only set this property when you create the status bar item. I don't think it is worth the effort to destroy and recreate the item to facilitate this.

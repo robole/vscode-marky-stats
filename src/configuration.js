@@ -29,6 +29,17 @@ class Configuration {
     return wpm;
   }
 
+  static getAlignment() {
+    let alignment = "";
+
+    if (vscode.workspace) {
+      const config = vscode.workspace.getConfiguration(prefix);
+      alignment = config.get(alignmentName);
+    }
+
+    return alignment;
+  }
+
   static getShowReadingTime() {
     let show = false;
 

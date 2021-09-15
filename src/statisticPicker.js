@@ -1,8 +1,8 @@
 /* eslint-disable class-methods-use-this */
 // eslint-disable-next-line import/no-unresolved, node/no-missing-require
 const vscode = require("vscode");
-const activeDoc = require("./activeDocument");
-const config = require("./configuration");
+const ActiveDocument = require("./activeDocument");
+const Configuration = require("./configuration");
 
 const labels = {
   READING_TIME: "Reading Time",
@@ -19,8 +19,10 @@ class StatisticPicker {
 
     this.loadSettings();
 
+    // the last paramete is *priority*. It determines how far left or right the position of
+    // the item is. This arbitary number gave me the desired result
     this.statusBarItem = vscode.window.createStatusBarItem(
-      vscode.StatusBarAlignment.Left,
+      this.alignment,
       10000
     );
     this.statusBarItem.command = "marky-stats.selectItem";
@@ -34,19 +36,19 @@ class StatisticPicker {
   update() {
     this.quickPickItems[0] = {
       name: labels.READING_TIME,
-      label: `${labels.READING_TIME}: ${activeDoc.getReadingTime()} mins`,
+      label: `${labels.READING_TIME}: ${ActiveDocument.getReadingTime()} mins`,
     };
     this.quickPickItems[1] = {
       name: labels.WORDS,
-      label: `${labels.WORDS}: ${activeDoc.getWordCount()}`,
+      label: `${labels.WORDS}: ${ActiveDocument.getWordCount()}`,
     };
     this.quickPickItems[2] = {
       name: labels.LINES,
-      label: `${labels.LINES}: ${activeDoc.getLineCount()}`,
+      label: `${labels.LINES}: ${ActiveDocument.getLineCount()}`,
     };
     this.quickPickItems[3] = {
       name: labels.CHARACTERS,
-      label: `${labels.CHARACTERS}: ${activeDoc.getCharacterCount()}`,
+      label: `${labels.CHARACTERS}: ${ActiveDocument.getCharacterCount()}`,
     };
 
     let filteredItems = this.quickPickItems.filter(
@@ -121,19 +123,21 @@ class StatisticPicker {
    *
    */
   async saveSettings() {
-    await config.updateShowReadingTime(
+    await Configuration.updateShowReadingTime(
       this.selectedItems.indexOf(labels.READING_TIME) >= 0
     );
 
-    await config.updateShowWords(this.selectedItems.indexOf(labels.WORDS) >= 0);
-
-    await config.updateShowLines(this.selectedItems.indexOf(labels.LINES) >= 0);
-
-    await config.updateShowCharacters(
-      this.selectedItems.indexOf(labels.CHARACTERS) >= 0
+    await Configuration.updateShowWords(
+      this.selectedItems.indexOf(labels.WORDS) >= 0
     );
 
-    await config.updateItemSeparator(this.itemSeparator);
+    await Configuration.updateShowLines(
+      this.selectedItems.indexOf(labels.LINES) >= 0
+    );
+
+    await Configuration.updateShowCharacters(
+      this.selectedItems.indexOf(labels.CHARACTERS) >= 0
+    );
   }
 
   /**
@@ -143,25 +147,33 @@ class StatisticPicker {
   loadSettings() {
     let selectedItems = [];
 
-    if (config.getShowReadingTime() === true) {
+    if (Configuration.getShowReadingTime() === true) {
       selectedItems.push(labels.READING_TIME);
     }
 
-    if (config.getShowWords() === true) {
+    if (Configuration.getShowWords() === true) {
       selectedItems.push(labels.WORDS);
     }
 
-    if (config.getShowLines() === true) {
+    if (Configuration.getShowLines() === true) {
       selectedItems.push(labels.LINES);
     }
 
-    if (config.getShowCharacters() === true) {
+    if (Configuration.getShowCharacters() === true) {
       selectedItems.push(labels.CHARACTERS);
     }
 
     this.selectedItems = selectedItems;
 
-    this.itemSeparator = config.getItemSeparator();
+    this.itemSeparator = Configuration.getItemSeparator();
+
+    let alignment = Configuration.getAlignment();
+
+    if (alignment === "Left") {
+      this.alignment = vscode.StatusBarAlignment.Left;
+    } else {
+      this.alignment = vscode.StatusBarAlignment.Right;
+    }
   }
 
   /**
@@ -182,7 +194,6 @@ class StatisticPicker {
 
   /**
    * Has the user clicked on the status bar item to change the statistics selected.
-   *
    */
   isSelectionChangeEvent() {
     return this.selectionChangeEvent;

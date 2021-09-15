@@ -6,7 +6,7 @@
   "author": {
     "name": "Rob O'Leary"
   },
-  "version": "0.5.1",
+  "version": "0.6.0",
   "engines": {
     "vscode": "^1.48.0",
     "node": ">=10.0.0"
@@ -58,6 +58,15 @@
       "type": "object",
       "title": "Marky Stats",
       "properties": {
+        "markyMarkdown.statsAlignment": {
+          "type": "string",
+          "default": "Left",
+          "enum": [
+            "Left",
+            "Right"
+          ],
+          "description": "Set the position on the status bar. Requires restart of VS Code to show the new position."
+        },
         "markyMarkdown.statsWordsPerMinute": {
           "type": "integer",
           "default": 250,

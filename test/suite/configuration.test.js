@@ -10,11 +10,19 @@ const defaultShowLines = false;
 const defaultShowCharacters = false;
 const defaultShowWords = false;
 const defaultItemSeparator = "  ";
+const defaultAlignment = "Left";
 
 suite("Configuration", () => {
+  // IF YOU CHANGED YOUR USER SETTINGS FOR THE EXTENSION, SOME OF THESE MIGHT FAIL!!
+
   test('get the default value of "Stats Words Per Minute"', () => {
     const wpm = Configuration.getWordsPerMinute();
     assert.strictEqual(wpm, defaultWordsPerMin);
+  });
+
+  test('get the default value of "Stats Alignment"', () => {
+    const alignment = Configuration.getAlignment();
+    assert.strictEqual(alignment, defaultAlignment);
   });
 
   test('get the default value of "Stats Show Reading Time"', () => {
@@ -88,16 +96,6 @@ suite("Configuration", () => {
     const configValue = Configuration.getShowLines();
 
     await Configuration.updateShowLines(defaultShowLines); //reset to default value
-
-    assert.strictEqual(configValue, newValue);
-  });
-
-  test('update the value of "Item Separator"', async function () {
-    const newValue = ",";
-    await Configuration.updateItemSeparator(newValue);
-    const configValue = Configuration.getItemSeparator();
-
-    await Configuration.updateItemSeparator(defaultItemSeparator); //reset to default value
 
     assert.strictEqual(configValue, newValue);
   });
