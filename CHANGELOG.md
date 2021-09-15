@@ -4,6 +4,16 @@ All notable changes to the "Marky Stats" extension will be documented in this fi
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.6.1] - 2021-09-15
+
+### Added
+
+- Added funding.yml.
+
+### Changed
+
+- Added enum values for `Stats Aligment` to README.
+
 ## [0.6.0] - 2021-09-15
 
 ### Added
@@ -12,7 +22,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ### Changed
 
-- Some refactoring of names,
+- Some refactoring of names.
 
 ## [0.5.1] - 2021-09-15
 

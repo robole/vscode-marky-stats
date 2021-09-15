@@ -47,7 +47,7 @@ The extension is only loaded when a markdown file is open. To be more specific, 
 | Marky Markdown: Stats Show Characters   | Boolean | false   | Show "Characters" counter on the status bar. |
 | Marky Markdown: Stats Item Separator  | String  | 2 spaces | Separator between items on status bar.                 |
 | Marky Markdown: Stats Words Per Minute | Integer | 250    | Set the words per minute that is used to calculate "Reading Time".      |
-| Marky Markdown: Stats Alignment | String (enum) | "Left"   | Set the position on the status bar. **Requires restart of VS Code to show new position.**     |
+| Marky Markdown: Stats Alignment | String (enum) | "Left"   | Set the position on the status bar. Values are : "Left" and "Right". *Requires restart of VS Code* to show new position.     |
 
 ## Installation
 
@@ -61,11 +61,11 @@ If there is a bug, please raise an issue.
 
 I consider this extension feature complete. You are welcome to raise an issue and make a suggestion, but I am unlikely to implement more features.
 
-## Gratitude
+## Show appreciation
 
-If you are happy with the extension, please star the repo, and leave a review to help others find it. 🌟🌟🌟🌟🌟
+If you are happy with the extension: please star the repo 🌟, and [leave a review in the visual studio marketplace](https://marketplace.visualstudio.com/items?itemName=robole.marky-stats&ssr=false#review-details) to help others find it. 🌟🌟🌟🌟🌟
 
-You can show appreciation by [buying me a coffee or sponsoring me](https://ko-fi.com/roboleary). This will enable me to dedicate more time to open-source.
+You can show your appreciation by [buying me a coffee or sponsoring me](https://ko-fi.com/roboleary). This will offer me encouragement to continue, and will provide a path to dedicating more time to open-source in the future.
 
 <p align="center">
 <a href="https://ko-fi.com/roboleary"><img src="img/coffee.png" alt="buy me a coffee"></a>
