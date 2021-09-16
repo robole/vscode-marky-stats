@@ -97,7 +97,7 @@
         "markyMarkdown.statsCharactersPerAuthorsSheet": {
           "type": "integer",
           "default": 40000,
-          "description": "Set the number of characters per one author's page."
+          "description": "Set the number of characters per one author's sheet."
         },
         "markyMarkdown.statsShowAuthorsSheets": {
           "type": "boolean",
