@@ -49,4 +49,16 @@ suite("Statistic Display", () => {
 
     assert.strictEqual(text, "Reading Time: 1 mins,Words: 31");
   });
+
+  test("Should be able to update the number of characters per author's sheet", async () => {
+    var s = extension.exports.getStatisticPicker();
+    s.setSelectedItems(["Author's Sheets"]);
+    await s.setCharactersPerAuthorsSheet(10);
+    s.update();
+    let text = s.getText();
+
+    await s.setCharactersPerAuthorsSheet(40000); //reset setting
+
+    assert.strictEqual(text, "Author's Sheets: 24.10");
+  });
 });

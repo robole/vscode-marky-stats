@@ -9,6 +9,7 @@ const labels = {
   WORDS: "Words",
   LINES: "Lines",
   CHARACTERS: "Characters",
+  AUTHORSSHEETS: "Author's Sheets",
 };
 
 class StatisticPicker {
@@ -49,6 +50,10 @@ class StatisticPicker {
     this.quickPickItems[3] = {
       name: labels.CHARACTERS,
       label: `${labels.CHARACTERS}: ${ActiveDocument.getCharacterCount()}`,
+    };
+    this.quickPickItems[4] = {
+      name: labels.AUTHORSSHEETS,
+      label: `${labels.AUTHORSSHEETS}: ${ActiveDocument.getAuthorsSheets()}`,
     };
 
     let filteredItems = this.quickPickItems.filter(
@@ -138,6 +143,10 @@ class StatisticPicker {
     await Configuration.updateShowCharacters(
       this.selectedItems.indexOf(labels.CHARACTERS) >= 0
     );
+
+    await Configuration.updateShowAuthorsSheets(
+      this.selectedItems.indexOf(labels.AUTHORSSHEETS) >= 0
+    );
   }
 
   /**
@@ -163,9 +172,15 @@ class StatisticPicker {
       selectedItems.push(labels.CHARACTERS);
     }
 
+    if (Configuration.getShowAuthorsSheets() === true) {
+      selectedItems.push(labels.AUTHORSSHEETS);
+    }
+
     this.selectedItems = selectedItems;
 
     this.itemSeparator = Configuration.getItemSeparator();
+
+    this.charactersPerAuthorsSheet = Configuration.getCharactersPerAuthorsSheet();
 
     let alignment = Configuration.getAlignment();
 
@@ -190,6 +205,14 @@ class StatisticPicker {
    */
   async setItemSeparator(newValue) {
     this.itemSeparator = newValue;
+  }
+
+  /**
+   * Set the number of characters per author's sheet. Only used for testing in this context.
+   * @param {string} newValue - The number of characters per author's sheet.
+   */
+  async setCharactersPerAuthorsSheet(newValue) {
+    this.charactersPerAuthorsSheet = newValue;
   }
 
   /**

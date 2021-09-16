@@ -39,15 +39,17 @@ The extension is only loaded when a markdown file is open. To be more specific, 
 
 ## Settings
 
-| Name                                               | Type    | Default | Description                                            |
-| -------------------------------------------------- | ------- | ------- | ------------------------------------------------------ |
-| Marky Markdown: Stats Show Reading Time | Boolean | true    | Show "Reading Time" on the status bar.       |
-| Marky Markdown: Stats Show Words        | Boolean | false   | Show "Words" counter on the status bar.      |
-| Marky Markdown: Stats Show Lines        | Boolean | false   | Show "Lines" counter on the status bar.      |
-| Marky Markdown: Stats Show Characters   | Boolean | false   | Show "Characters" counter on the status bar. |
-| Marky Markdown: Stats Item Separator  | String  | 2 spaces | Separator between items on status bar.                 |
-| Marky Markdown: Stats Words Per Minute | Integer | 250    | Set the words per minute that is used to calculate "Reading Time".      |
-| Marky Markdown: Stats Alignment | String (enum) | "Left"   | Set the position on the status bar. Values are : "Left" and "Right". *Requires restart of VS Code* to show new position.     |
+| Name                                                | Type          | Default  | Description                                                                                                              |
+| --------------------------------------------------- | ------------- | -------- | ------------------------------------------------------------------------------------------------------------------------ |
+| Marky Markdown: Stats Show Reading Time             | Boolean       | true     | Show "Reading Time" on the status bar.                                                                                   |
+| Marky Markdown: Stats Show Words                    | Boolean       | false    | Show "Words" counter on the status bar.                                                                                  |
+| Marky Markdown: Stats Show Lines                    | Boolean       | false    | Show "Lines" counter on the status bar.                                                                                  |
+| Marky Markdown: Stats Show Characters               | Boolean       | false    | Show "Characters" counter on the status bar.                                                                             |
+| Marky Markdown: Stats Show Author's Sheets          | Boolean       | false    | Show "Author's Sheets" counter on the status bar.                                                                        |
+| Marky Markdown: Stats Item Separator                | String        | 2 spaces | Separator between items on status bar.                                                                                   |
+| Marky Markdown: Stats Words Per Minute              | Integer       | 250      | Set the words per minute that is used to calculate "Reading Time".                                                       |
+| Marky Markdown: Stats Characters per Author's Sheet | Integer       | 40000    | Set the characters per author's sheet that is used to calculate "Author's Sheet".                                        |
+| Marky Markdown: Stats Alignment                     | String (enum) | "Left"   | Set the position on the status bar. Values are : "Left" and "Right". *Requires restart of VS Code* to show new position. |
 
 ## Installation
 

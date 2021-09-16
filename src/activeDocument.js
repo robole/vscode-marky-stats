@@ -55,6 +55,23 @@ class ActiveDocument {
     return 0;
   }
 
+	/**
+	 * Get the number of author's sheets ().
+	 *
+	 */
+	static getAuthorsSheets() {
+		const editor = vscode.window.activeTextEditor;
+
+		if (editor !== undefined && editor.document !== undefined) {
+			const text = editor.document.getText();
+			const charactersPerAuthorsSheet = Configuration.getCharactersPerAuthorsSheet();
+
+			return (Math.floor(text.length * 100 / charactersPerAuthorsSheet) / 100).toFixed(2);
+		}
+
+		return 0;
+	}
+
   /**
    * Get the number of lines.
    *

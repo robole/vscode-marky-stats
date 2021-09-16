@@ -94,6 +94,16 @@
           "default": false,
           "description": "Show \"Characters\" counter on the status bar."
         },
+        "markyMarkdown.statsCharactersPerAuthorsSheet": {
+          "type": "integer",
+          "default": 40000,
+          "description": "Set the number of characters per one author's page."
+        },
+        "markyMarkdown.statsShowAuthorsSheets": {
+          "type": "boolean",
+          "default": false,
+          "description": "Show \"Author's Sheets\" counter on the status bar."
+        },
         "markyMarkdown.statsItemSeparator": {
           "type": "string",
           "default": "  ",

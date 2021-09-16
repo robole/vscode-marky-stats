@@ -10,6 +10,8 @@ const showReadingTimeName = "statsShowReadingTime";
 const showWordsName = "statsShowWords";
 const showLinesName = "statsShowLines";
 const showCharactersName = "statsShowCharacters";
+const charactersPerAuthorsSheet = "statsCharactersPerAuthorsSheet";
+const showAuthorsSheets = "statsShowAuthorsSheets";
 const itemSeparatorName = "statsItemSeparator";
 const alignmentName = "statsAlignment";
 
@@ -84,6 +86,28 @@ class Configuration {
     return show;
   }
 
+  static getCharactersPerAuthorsSheet() {
+    let number = 40000;
+
+    if (vscode.workspace) {
+      const config = vscode.workspace.getConfiguration(prefix);
+      number = parseInt(config.get(charactersPerAuthorsSheet));
+    }
+
+    return number;
+  }
+
+  static getShowAuthorsSheets() {
+    let show = false;
+
+    if (vscode.workspace) {
+      const config = vscode.workspace.getConfiguration(prefix);
+      show = config.get(showAuthorsSheets);
+    }
+
+    return show;
+  }
+
   static getItemSeparator() {
     let separator = "  ";
 
@@ -127,6 +151,20 @@ class Configuration {
     if (vscode.workspace) {
       const config = vscode.workspace.getConfiguration(prefix);
       await config.update(showCharactersName, newValue, scope);
+    }
+  }
+
+  static async updateCharactersPerAuthorsSheet(newValue) {
+    if (vscode.workspace) {
+      const config = vscode.workspace.getConfiguration(prefix);
+      await config.update(charactersPerAuthorsSheet, newValue, scope);
+    }
+  }
+
+  static async updateShowAuthorsSheets(newValue) {
+    if (vscode.workspace) {
+      const config = vscode.workspace.getConfiguration(prefix);
+      await config.update(showAuthorsSheets, newValue, scope);
     }
   }
 
