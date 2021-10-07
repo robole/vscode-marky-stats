@@ -23,13 +23,20 @@ function activate(context) {
       }
     }),
     vscode.workspace.onDidChangeConfiguration(function (e) {
-      // update only if it was a marky markdown setting was changed directly in the config file
+      // update only if a marky markdown setting was changed directly through the Settings
       if (
         statisticPicker.isSelectionChangeEvent() === false &&
         e.affectsConfiguration(Configuration.getPrefix())
       ) {
-        statisticPicker.loadSettings(); //"reload" setttings
-        statisticPicker.update();
+        let aligmentConfig = Configuration.getAlignment();
+
+        // if the value of alignment has changed
+        if (statisticPicker.alignment !== aligmentConfig) {
+          statisticPicker.reload();
+        } else {
+          statisticPicker.loadSettings();
+          statisticPicker.update();
+        }
       }
     }),
     vscode.window.onDidChangeActiveTextEditor(function (e) {
@@ -41,7 +48,7 @@ function activate(context) {
     })
   );
 
-  /* This can be called externally through vscode.extensions.getExtension(extensionID).exports.
+  /* This can be called externally through `vscode.extensions.getExtension(extensionID).exports`.
    This is useful for testing. See statisticPicker.test.js for an example. */
   let api = {
     getStatisticPicker() {

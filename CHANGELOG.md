@@ -4,11 +4,21 @@ All notable changes to the "Marky Stats" extension will be documented in this fi
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.7.0] - 2021-10-07
+
+### Changed
+
+- Change the position of the status bar item immediately when the `alignment` setting is changed. Changed `statisticPicker.js` to recreate the status bar item when the `alignment` setting is changed.
+
+### Added
+
+- Added a warning message when no stat is selected.
+
 ## [0.6.2] - 2021-10-07
 
 ### Fixed
 
-- When no stat is selected, set label to "No stat selected"
+- When no stat is selected, set the text of status bar item to "No stat selected".
 
 ## [0.6.1] - 2021-09-15
 

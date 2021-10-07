@@ -47,7 +47,7 @@ The extension is only loaded when a markdown file is open. To be more specific, 
 | Marky Markdown: Stats Show Characters   | Boolean | false   | Show "Characters" counter on the status bar. |
 | Marky Markdown: Stats Item Separator  | String  | 2 spaces | Separator between items on status bar.                 |
 | Marky Markdown: Stats Words Per Minute | Integer | 250    | Set the words per minute that is used to calculate "Reading Time".      |
-| Marky Markdown: Stats Alignment | String (enum) | "Left"   | Set the position on the status bar. Values are : "Left" and "Right". *Requires restart of VS Code* to show new position.     |
+| Marky Markdown: Stats Alignment | String (enum) | "Left"   | Set the position on the status bar. Values are : "Left" and "Right".|
 
 ## Installation
 

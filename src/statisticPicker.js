@@ -19,19 +19,44 @@ class StatisticPicker {
 
     this.loadSettings();
 
-    // the last paramete is *priority*. It determines how far left or right the position of
-    // the item is. This arbitary number gave me the desired result
-    this.statusBarItem = vscode.window.createStatusBarItem(
-      this.alignment,
-      10000
-    );
-    this.statusBarItem.command = "marky-stats.selectItem";
+    this.statusBarItem = createStatusBarItem(this.alignment);
 
     this.show();
   }
 
   /**
-   * Update the statistic based on the latest text of the active document.
+   * Get the settings from the workspace configuration.
+   *
+   */
+  loadSettings() {
+    let selectedItems = [];
+
+    if (Configuration.getShowReadingTime() === true) {
+      selectedItems.push(labels.READING_TIME);
+    }
+
+    if (Configuration.getShowWords() === true) {
+      selectedItems.push(labels.WORDS);
+    }
+
+    if (Configuration.getShowLines() === true) {
+      selectedItems.push(labels.LINES);
+    }
+
+    if (Configuration.getShowCharacters() === true) {
+      selectedItems.push(labels.CHARACTERS);
+    }
+
+    this.selectedItems = selectedItems;
+
+    this.itemSeparator = Configuration.getItemSeparator();
+
+    // Values are: "Left" and "Right"
+    this.alignment = Configuration.getAlignment();
+  }
+
+  /**
+   * Update the statistics based on the latest text of the active document.
    */
   update() {
     this.quickPickItems[0] = {
@@ -51,22 +76,42 @@ class StatisticPicker {
       label: `${labels.CHARACTERS}: ${ActiveDocument.getCharacterCount()}`,
     };
 
-    let filteredItems = this.quickPickItems.filter(
+    let filteredQuickPickItems = this.quickPickItems.filter(
       (x) => this.selectedItems.indexOf(x.name) >= 0
     );
 
-    filteredItems.forEach(function (item, index) {
+    filteredQuickPickItems.forEach((item) => {
       item.picked = true;
     });
 
-    // if no selection is made, this is what is shown
-    let label = "No stat selected";
+    let text = "No stat selected";
 
-    if (filteredItems.length > 0) {
-      label = filteredItems.map((x) => x.label).join(this.itemSeparator);
+    // if items are selected
+    if (filteredQuickPickItems.length > 0) {
+      text = filteredQuickPickItems
+        .map((x) => x.label)
+        .join(this.itemSeparator);
+    } else {
+      vscode.window.showWarningMessage(
+        "Did you intend to deselect all statistics? The text 'No stat selected' is now shown in the status bar."
+      );
     }
 
-    this.statusBarItem.text = label;
+    this.statusBarItem.text = text;
+  }
+
+  /**
+   * Reload the status bar item to reflect all config changes. The alignment property can only be set when
+   * a status bar item is created, therefore we need to create a new status bar item to show the
+   * change when the user changes the setting.
+   */
+  reload() {
+    this.loadSettings();
+
+    this.dispose();
+    this.statusBarItem = createStatusBarItem(this.alignment);
+
+    this.show();
   }
 
   /**
@@ -145,39 +190,10 @@ class StatisticPicker {
   }
 
   /**
-   * Get the settings from the workspace configuration.
-   *
+   * Has the user clicked on the status bar item to change the statistics selected.
    */
-  loadSettings() {
-    let selectedItems = [];
-
-    if (Configuration.getShowReadingTime() === true) {
-      selectedItems.push(labels.READING_TIME);
-    }
-
-    if (Configuration.getShowWords() === true) {
-      selectedItems.push(labels.WORDS);
-    }
-
-    if (Configuration.getShowLines() === true) {
-      selectedItems.push(labels.LINES);
-    }
-
-    if (Configuration.getShowCharacters() === true) {
-      selectedItems.push(labels.CHARACTERS);
-    }
-
-    this.selectedItems = selectedItems;
-
-    this.itemSeparator = Configuration.getItemSeparator();
-
-    let alignment = Configuration.getAlignment();
-
-    if (alignment === "Left") {
-      this.alignment = vscode.StatusBarAlignment.Left;
-    } else {
-      this.alignment = vscode.StatusBarAlignment.Right;
-    }
+  isSelectionChangeEvent() {
+    return this.selectionChangeEvent;
   }
 
   /**
@@ -192,16 +208,34 @@ class StatisticPicker {
    * Set the text that separates each statistic item. Only used for testing in this context.
    * @param {string} newValue - The text that separates each statistic item.
    */
-  async setItemSeparator(newValue) {
+  setItemSeparator(newValue) {
     this.itemSeparator = newValue;
   }
+}
 
-  /**
-   * Has the user clicked on the status bar item to change the statistics selected.
-   */
-  isSelectionChangeEvent() {
-    return this.selectionChangeEvent;
+/**
+ * Factory method to create a new status bar item
+ */
+function createStatusBarItem(alignment = "Left") {
+  // priority determines how far to the left or right the item
+  // is aligned. These arbitary numbers gave me the result I desired,
+  // which is to keep the item closest to the center of the bar
+  let priority = 0;
+  let alignmentEnumValue = vscode.StatusBarAlignment.Left;
+
+  if (alignment === "Right") {
+    alignmentEnumValue = vscode.StatusBarAlignment.Right;
+    priority = 10000;
   }
+
+  let statusBarItem = vscode.window.createStatusBarItem(
+    alignmentEnumValue,
+    priority
+  );
+
+  statusBarItem.command = "marky-stats.selectItem";
+
+  return statusBarItem;
 }
 
 module.exports = StatisticPicker;

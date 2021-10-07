@@ -6,7 +6,7 @@
   "author": {
     "name": "Rob O'Leary"
   },
-  "version": "0.6.2",
+  "version": "0.7.0",
   "engines": {
     "vscode": "^1.48.0",
     "node": ">=10.0.0"
@@ -25,10 +25,14 @@
     "reading time",
     "word count",
     "wordcount",
+    "word counter",
     "reading time",
     "reading statistics",
     "reading stat",
-    "word counter"
+    "markdown status bar",
+    "status bar",
+    "status bar statistics",
+    "status bar stats"
   ],
   "categories": [
     "Other"
@@ -65,7 +69,7 @@
             "Left",
             "Right"
           ],
-          "description": "Set the position on the status bar. Requires restart of VS Code to show the new position."
+          "description": "Set the position on the status bar."
         },
         "markyMarkdown.statsWordsPerMinute": {
           "type": "integer",
