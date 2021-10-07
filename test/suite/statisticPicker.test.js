@@ -24,11 +24,11 @@ suite("Statistic Display", () => {
     assert.strictEqual(s.getText(), "Reading Time: 1 mins");
   });
 
-  test("Should show an empty string if no stats are selected", async () => {
+  test("Should show the string 'No stat selected' if no stat is selected", async () => {
     var s = extension.exports.getStatisticPicker();
     s.setSelectedItems([]);
     s.update();
-    assert.strictEqual(s.getText(), "");
+    assert.strictEqual(s.getText(), "No stat selected");
   });
 
   test("Should display multiple statistics", async () => {

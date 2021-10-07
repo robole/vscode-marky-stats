@@ -4,6 +4,12 @@ All notable changes to the "Marky Stats" extension will be documented in this fi
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.6.2] - 2021-10-07
+
+### Fixed
+
+- When no stat is selected, set label to "No stat selected"
+
 ## [0.6.1] - 2021-09-15
 
 ### Added

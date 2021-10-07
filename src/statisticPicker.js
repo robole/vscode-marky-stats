@@ -59,8 +59,12 @@ class StatisticPicker {
       item.picked = true;
     });
 
-    // if no selection is made, this is an empty string
-    let label = filteredItems.map((x) => x.label).join(this.itemSeparator);
+    // if no selection is made, this is what is shown
+    let label = "No stat selected";
+
+    if (filteredItems.length > 0) {
+      label = filteredItems.map((x) => x.label).join(this.itemSeparator);
+    }
 
     this.statusBarItem.text = label;
   }
@@ -107,7 +111,7 @@ class StatisticPicker {
     const statPicker = this;
     quickPick.then(async function (fufilled) {
       if (fufilled) {
-        var newSelections = fufilled.map((x) => x.name);
+        let newSelections = fufilled.map((x) => x.name);
         statPicker.selectedItems = newSelections;
 
         statPicker.selectionChangeEvent = true;
