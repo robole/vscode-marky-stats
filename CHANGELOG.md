@@ -4,6 +4,16 @@ All notable changes to the "Marky Stats" extension will be documented in this fi
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.9.0] - 2023-04-08
+
+### Added
+
+- Added a license.
+
+### Changed
+
+- Remove some unnecessary files making into vsix by updating *.vscodeignore*.
+
 ## [0.8.1] - 2023-04-08
 
 ### Changed

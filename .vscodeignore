@@ -11,4 +11,5 @@ src
 webpack.config.js
 img/**
 !img/logo.png
-readme.md
+blurb.md
+funding.yml
