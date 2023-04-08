@@ -4,6 +4,12 @@ All notable changes to the "Marky Stats" extension will be documented in this fi
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.8.1] - 2023-04-08
+
+### Changed
+
+- The secret token for the GitHub action to publish to VS Code Marketplae was out of date. Incrementing version number to verify autopublishing is correctly implemented.
+
 ## [0.8.0] - 2023-04-08
 
 ### Changed
