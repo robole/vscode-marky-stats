@@ -6,7 +6,7 @@
   "author": {
     "name": "Rob O'Leary"
   },
-  "version": "0.7.0",
+  "version": "0.8.0",
   "engines": {
     "vscode": "^1.48.0",
     "node": ">=10.0.0"
@@ -15,6 +15,9 @@
   "galleryBanner": {
     "color": "#00ffff",
     "theme": "light"
+  },
+  "sponsor": {
+    "url": "https://ko-fi.com/roboleary"
   },
   "keywords": [
     "markdown",
@@ -128,9 +131,9 @@
     "mocha": "^7.1.2",
     "prettier": "^2.0.5",
     "typescript": "^3.8.3",
-    "vsce": "^1.77.0",
+    "vsce": "^2.15.0",
     "vscode-test": "^1.3.0",
-    "webpack": "^5.50.0",
-    "webpack-cli": "^3.3.12"
+    "webpack": "^5.78.0",
+    "webpack-cli": "^5.0.1"
   }
 }

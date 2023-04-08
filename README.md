@@ -7,7 +7,7 @@
   <br>
   <br>
 </h1>
-<h4 align="center">Stats for Markdown documents</h4>
+<h4 align="center">Configurable statistics of your markdown document on your status bar</h4>
 
 <p align="center">
 <img src="https://img.shields.io/static/v1?logo=visual-studio-code&label=made%20for&message=VS%20Code&color=0000ff" alt="Made for VSCode">

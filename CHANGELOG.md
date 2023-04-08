@@ -4,6 +4,14 @@ All notable changes to the "Marky Stats" extension will be documented in this fi
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.8.0] - 2023-04-08
+
+### Changed
+
+- Changed subtitle in README to more clearly articulate purpose of extension.
+- Updated webpack and webpack cli to version 5.
+- Updated VSCE and included the `sponsors` field in *package.json*.
+
 ## [0.7.0] - 2021-10-07
 
 ### Changed
