@@ -4,6 +4,12 @@ All notable changes to the "Marky Stats" extension will be documented in this fi
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.10.1] - 2023-04-08
+
+### Changed
+
+- Changed some details in *package.json* to see if uploading to marketplace manually will recognize sponsors field.
+
 ## [0.10.0] - 2023-04-08
 
 ### Changed
