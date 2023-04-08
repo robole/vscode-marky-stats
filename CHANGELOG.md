@@ -4,6 +4,13 @@ All notable changes to the "Marky Stats" extension will be documented in this fi
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.10.0] - 2023-04-08
+
+### Changed
+
+- Updated description in *package.json* to match subtitle in *README.md*.
+- Tidied up *Show appreciation* section of README.
+
 ## [0.9.0] - 2023-04-08
 
 ### Added

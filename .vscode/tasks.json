@@ -12,7 +12,7 @@
     {
       "label": "Run npm webpack on startup",
       "type": "shell",
-      "command": "npm run webpack-dev",
+      "command": "npm run dev",
       "presentation": {
         "reveal": "always",
         "panel": "new"

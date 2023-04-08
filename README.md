@@ -7,12 +7,12 @@
   <br>
   <br>
 </h1>
-<h4 align="center">Configurable statistics of your markdown document on your status bar</h4>
+<h4 align="center">Configurable statistics about your markdown document on your status bar</h4>
 
 <p align="center">
 <img src="https://img.shields.io/static/v1?logo=visual-studio-code&label=made%20for&message=VS%20Code&color=0000ff" alt="Made for VSCode">
 <img src="https://img.shields.io/visual-studio-marketplace/v/robole.marky-stats?logo=visual-studio-code&color=ffa500" alt="Visual Studio Marketplace Version">
-<img src="https://img.shields.io/static/v1?logo=visual-studio-code&label=size&message=14KB&color=008000"
+<img src="https://img.shields.io/static/v1?logo=visual-studio-code&label=size&message=19KB&color=008000"
 alt="Extension file size in bytes">
 <img src="https://img.shields.io/visual-studio-marketplace/r/robole.marky-stats?logo=visual-studio-code&color=yellow" alt="Visual Studio Marketplace Rating">
 <img src="https://img.shields.io/visual-studio-marketplace/d/robole.marky-stats?logo=visual-studio-code&color=blue" alt="downloads"/>
@@ -61,15 +61,18 @@ If there is a bug, please raise an issue.
 
 I consider this extension feature complete. You are welcome to raise an issue and make a suggestion, but I am unlikely to implement more features.
 
-## Show appreciation
+## Appreciate
 
-If you are happy with the extension: please star the repo 🌟, and [leave a review in the visual studio marketplace](https://marketplace.visualstudio.com/items?itemName=robole.marky-stats&ssr=false#review-details) to help others find it. 🌟🌟🌟🌟🌟
+You can show your appreciation by:
+1. [Buying me a coffee or sponsoring me](https://ko-fi.com/roboleary)
+1. Leaving a positive review in the [visual studio marketplace](<https://marketplace.visualstudio.com/items?itemName=robole.marky-stats&ssr=false#review-details>).
+1. Starring the repo 🌟.
 
-You can show your appreciation by [buying me a coffee or sponsoring me](https://ko-fi.com/roboleary). This will offer me encouragement to continue, and will provide a path to dedicating more time to open-source in the future.
+This will **help other people find the extension**.
 
-<p align="center">
-<a href="https://ko-fi.com/roboleary"><img src="img/coffee.png" alt="buy me a coffee"></a>
-</p>
+It will **offer me encouragement** to continue, and can provide **a path to dedicating more time to open-source** in the future.
+
+Thank you! 🙏
 
 ## FAQ
 

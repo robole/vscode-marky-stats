@@ -1,12 +1,12 @@
 {
   "name": "marky-stats",
   "displayName": "Marky Stats",
-  "description": "Stats for Markdown documents.",
+  "description": "Configurable statistics about your markdown document on your status bar.",
   "publisher": "robole",
   "author": {
     "name": "Rob O'Leary"
   },
-  "version": "0.9.0",
+  "version": "0.10.0",
   "engines": {
     "vscode": "^1.48.0",
     "node": ">=10.0.0"
@@ -15,9 +15,6 @@
   "galleryBanner": {
     "color": "#00ffff",
     "theme": "light"
-  },
-  "sponsor": {
-    "url": "https://ko-fi.com/roboleary"
   },
   "keywords": [
     "markdown",
@@ -47,7 +44,10 @@
     "type": "git",
     "url": "https://github.com/robole/vscode-marky-stats"
   },
-  "license": "MIT",
+  "sponsor": {
+    "url": "https://ko-fi.com/roboleary"
+  },
+  "license": "Apache License 2.0",
   "activationEvents": [
     "onLanguage:markdown"
   ],
@@ -115,7 +115,7 @@
     "format": "npx prettier --write .",
     "test": "node ./test/runTest.js",
     "webpack": "webpack --mode development",
-    "webpack-dev": "webpack --mode development --watch",
+    "dev": "webpack --mode development --watch",
     "vscode:prepublish": "webpack --mode production",
     "build": "vsce package"
   },
