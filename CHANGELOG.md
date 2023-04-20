@@ -4,6 +4,12 @@ All notable changes to the "Marky Stats" extension will be documented in this fi
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.11.0] - 2023-04-20
+
+### Removed
+
+- Removed *installation* section from the README.
+
 ## [0.10.1] - 2023-04-08
 
 ### Changed

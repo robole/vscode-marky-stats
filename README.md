@@ -49,12 +49,6 @@ The extension is only loaded when a markdown file is open. To be more specific, 
 | Marky Markdown: Stats Words Per Minute | Integer | 250    | Set the words per minute that is used to calculate "Reading Time".      |
 | Marky Markdown: Stats Alignment | String (enum) | "Left"   | Set the position on the status bar. Values are : "Left" and "Right".|
 
-## Installation
-
-1. The extension is listed in the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=robole.marky-stats) and [Open VSX Marketplace](https://open-vsx.org/extension/robole/marky-stats) where you can download or install it directly.
-1. Inside VS Code: Type `Ctrl+P`, write `ext install robole.marky-stats` in the text field, and hit `Enter`.
-1. From the Command-line: Run the command `code --install-extension robole.marky-stats`.
-
 ## Contributions
 
 If there is a bug, please raise an issue.
