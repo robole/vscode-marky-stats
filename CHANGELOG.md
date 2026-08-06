@@ -4,6 +4,16 @@ All notable changes to the "Marky Stats" extension will be documented in this fi
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.12.0] - 2026-08-05
+
+### Removed
+
+- Removed badges from the README.
+
+### Changed
+
+- Update `publish.yml` to use Node v24. Update PAT secret to automate publishing to VS Code Marketplace.
+
 ## [0.11.0] - 2023-04-20
 
 ### Removed
